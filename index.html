@@ -1,446 +1,340 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NH Senior Training Simulator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    body { margin: 0; }
-    .select-none { user-select: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>시니어 주문 연습기 - 주문바 축소</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            color: #000000;
+            margin: 0;
+            overflow: hidden;
+            touch-action: manipulation;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-wrapper {
+            width: 100vw;
+            height: 100vh;
+            max-width: 500px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* 카테고리 영역 */
+        .category-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: #222;
+            padding: 8px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .category-container::-webkit-scrollbar { display: none; }
+
+        .cat-item {
+            padding: 10px 18px;
+            margin: 0 4px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .cat-item.active {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        /* 메뉴 그리드 설정: 겹침 방지를 위해 row-gap 확보 */
+        .menu-grid {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 12px;
+            row-gap: 30px; 
+            grid-auto-rows: min-content;
+            padding-bottom: 160px; /* 하단바 축소에 맞춰 여백 조정 */
+            background-color: #fdfdfd;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid #eee;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+            height: fit-content;
+        }
+
+        .card-img {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+
+        /* 담기 버튼 */
+        .add-btn {
+            background-color: #262626;
+            color: white;
+            padding: 12px 0;
+            margin: 8px;
+            border-radius: 0.6rem;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+        .add-btn:active { background-color: #000; transform: scale(0.96); }
+
+        /* 하단 주문바 (50% 축소 디자인) */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #111;
+            padding: 10px 15px 15px 15px; /* 패딩 축소 */
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 -8px 15px rgba(0,0,0,0.3);
+            z-index: 50;
+        }
+
+        .order-btn-small {
+            background-color: #ef4444;
+            color: white;
+            width: 100%;
+            padding: 14px; /* 높이 축소 */
+            border-radius: 12px;
+            font-size: 1.3rem; /* 폰트 크기 조정 */
+            font-weight: 900;
+            text-align: center;
+            border: none;
+        }
+        .order-btn-small:active { background-color: #dc2626; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
+<div class="app-wrapper">
+    <!-- 상단 헤더 -->
+    <div class="bg-zinc-900 p-3 text-center">
+        <h1 class="text-yellow-400 font-black text-lg">실습용 메뉴판</h1>
+        <p class="text-zinc-400 text-[10px] mt-0.5">💡 드시고 싶은 메뉴의 [담기]를 누르세요.</p>
+    </div>
 
-    const Icon = ({ children, size = 40, className = '' }) => (
-      <span className={className} style={{ fontSize: size, lineHeight: 1 }}>{children}</span>
-    );
+    <!-- 카테고리 -->
+    <div class="category-container" id="category-bar">
+        <div onclick="changeCategory('best')" id="cat-best" class="cat-item active">인기메뉴</div>
+        <div onclick="changeCategory('main')" id="cat-main" class="cat-item">보쌈/족발</div>
+        <div onclick="changeCategory('side')" id="cat-side" class="cat-item">사이드</div>
+        <div onclick="changeCategory('drink')" id="cat-drink" class="cat-item">음료/주류</div>
+    </div>
 
-    const App = () => {
-      const [step, setStep] = useState('HOME'); 
-      const [service, setService] = useState(null); 
-      const [inputVal, setInputVal] = useState('');
-      const [targetBank, setTargetBank] = useState('');
-      const [history, setHistory] = useState(['HOME']);
-      const [msg, setMsg] = useState('거래를 시작해 주세요.');
-      const [autoCountAmount] = useState(50000);
+    <!-- 메뉴 리스트 -->
+    <div id="menu-grid" class="menu-grid">
+        <!-- JS로 메뉴가 생성됩니다 -->
+    </div>
 
-      const BANKS = ['NH농협', '신한은행', '국민은행', '우리은행', '하나은행', '우체국'];
-
-      const formatAccountNumber = (val) => {
-        if (!val) return '0';
-        let res = '';
-        for (let i = 0; i < val.length; i++) {
-          if (i === 3 || i === 9 || i === 11) res += '-';
-          res += val[i];
-        }
-        return res;
-      };
-
-      const formatAmount = (val) => {
-        if (!val) return '0';
-        return Number(val).toLocaleString();
-      };
-
-      const updateMessage = (currentStep, currentService) => {
-        switch (currentStep) {
-          case 'HOME': setMsg('거래를 시작하시려면 화면을 터치해 주세요.'); break;
-          case 'SERVICE_SELECT': setMsg('원하시는 거래 버튼을 눌러 주세요.'); break;
-          case 'PIN_INPUT': setMsg('비밀번호 4자리를 입력해 주십시오.'); break;
-          case 'CASH_INSERT': setMsg('현금을 투입구에 가지런히 넣어주세요.'); break;
-          case 'CASH_COUNT': setMsg('현금을 확인하고 있습니다. 잠시만 기다려 주세요.'); break;
-          case 'AMOUNT_CONFIRM': setMsg('투입하신 금액이 맞는지 확인해 주세요.'); break;
-          case 'PASSBOOK_INSERT': setMsg('통장의 마지막 페이지를 펴서 넣어주세요.'); break;
-          case 'PASSBOOK_PRINTING': setMsg('통장을 정리하고 있습니다.'); break;
-          case 'AMOUNT_INPUT': setMsg('금액을 만원 단위로 입력해 주세요.'); break;
-          case 'ACCOUNT_INPUT': setMsg('계좌번호 12자리를 입력해 주세요.'); break;
-          case 'BANK_SELECT': setMsg('돈을 보내실 은행을 선택해 주세요.'); break;
-          case 'CONFIRM': setMsg('입력하신 내용이 맞는지 확인해 주세요.'); break;
-          case 'PROCESSING': setMsg('거래를 처리 중입니다. 잠시만 기다려 주세요.'); break;
-          case 'SUCCESS': 
-            if (currentService === 'PASSBOOK') setMsg('통장 정리가 종료되었습니다.');
-            else setMsg('거래가 성공적으로 완료되었습니다.');
-            break;
-          default: setMsg('안내에 따라 진행해 주세요.');
-        }
-      };
-
-      const navigateTo = (nextStep, serviceType = null) => {
-        const nextService = serviceType || service;
-        setHistory(prev => [...prev, nextStep]);
-        setStep(nextStep);
-        if (serviceType) setService(serviceType);
-        updateMessage(nextStep, nextService);
-      };
-
-      const goBack = () => {
-        if (history.length > 1) {
-          const newHistory = [...history];
-          newHistory.pop();
-          const prevStep = newHistory[newHistory.length - 1];
-          setHistory(newHistory);
-          setStep(prevStep);
-          updateMessage(prevStep, service);
-          setInputVal(''); 
-        }
-      };
-
-      const resetHome = () => {
-        setStep('HOME');
-        setHistory(['HOME']);
-        setInputVal('');
-        setService(null);
-        setTargetBank('');
-        updateMessage('HOME', null);
-      };
-
-      const addDigit = (digit) => {
-        if (step === 'PIN_INPUT' && inputVal.length < 4) setInputVal(inputVal + digit);
-        if (step === 'ACCOUNT_INPUT' && inputVal.length < 12) setInputVal(inputVal + digit);
-        if (step === 'AMOUNT_INPUT' && inputVal.length < 10) setInputVal(inputVal + digit);
-      };
-
-      const clearDigit = () => setInputVal(inputVal.slice(0, -1));
-
-      useEffect(() => {
-        if (step === 'CASH_COUNT') {
-          const timer = setTimeout(() => {
-            setStep('AMOUNT_CONFIRM');
-            updateMessage('AMOUNT_CONFIRM', service);
-          }, 2000);
-          return () => clearTimeout(timer);
-        }
-        if (step === 'PASSBOOK_PRINTING') {
-          const timer = setTimeout(() => {
-            setStep('SUCCESS');
-            updateMessage('SUCCESS', service);
-          }, 3500);
-          return () => clearTimeout(timer);
-        }
-        if (step === 'PROCESSING') {
-          const timer = setTimeout(() => {
-            setStep('SUCCESS');
-            updateMessage('SUCCESS', service);
-          }, 2500);
-          return () => clearTimeout(timer);
-        }
-      }, [step, service]);
-
-      const Keypad = () => (
-        <div className="grid grid-cols-3 gap-2 w-full max-w-[340px] mx-auto">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, '초기화', 0, '삭제'].map((k) => (
-            <button
-              key={k}
-              onClick={() => {
-                if (k === '삭제') clearDigit();
-                else if (k === '초기화') setInputVal('');
-                else addDigit(k.toString());
-              }}
-              className={`h-16 text-3xl font-black rounded-xl shadow active:bg-blue-100 transition-colors border-2 ${
-                typeof k === 'number' ? 'bg-white text-slate-800 border-slate-200' : 'bg-slate-100 text-slate-600 border-slate-300'
-              }`}
-            >
-              {k}
-            </button>
-          ))}
+    <!-- 축소된 하단 주문바 -->
+    <div class="bottom-nav">
+        <div class="flex justify-between items-end px-1">
+            <button onclick="showStaffCall()" class="text-white bg-zinc-700 px-3 py-1.5 rounded-lg font-bold text-xs">🔔 직원호출</button>
+            <div class="text-right">
+                <p class="text-zinc-500 text-[10px] font-bold leading-none">총 주문금액</p>
+                <p id="total-price" class="text-yellow-400 text-xl font-black">0원</p>
+            </div>
         </div>
-      );
+        <button onclick="showOrderReview()" id="order-start-btn" class="order-btn-small">
+            주문하기 (<span id="cart-count">0</span>)
+        </button>
+    </div>
+</div>
 
-      return (
-        <div className="min-h-screen bg-gray-100 flex items-center justify-center p-1 font-sans select-none">
-          <div className="w-full max-w-md bg-white rounded-[30px] shadow-2xl overflow-hidden border-[8px] border-slate-400 h-[850px] flex flex-col relative">
-            <div className="bg-[#002b5c] p-4 text-white flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <div className="bg-white px-2 py-1 rounded text-[#002b5c] font-black text-sm">NH</div>
-                <span className="text-xl font-extrabold">NH농협은행</span>
-              </div>
-              <div className="flex items-center gap-1 text-sm font-bold text-yellow-400">
-                ☎ 도움말: 1588-2100
-              </div>
-            </div>
-
-            <div className="bg-blue-50 p-6 border-b-2 border-blue-100 text-center">
-              <h2 className="text-2xl font-black text-slate-800 break-keep min-h-[64px] flex items-center justify-center leading-tight">
-                {msg}
-              </h2>
-            </div>
-
-            <div className="flex-grow p-4 flex flex-col bg-[#f0f4f8] overflow-hidden">
-              {step === 'HOME' && (
-                <div className="h-full flex flex-col items-center justify-center cursor-pointer space-y-6" onClick={() => navigateTo('SERVICE_SELECT')}>
-                  <div className="text-blue-900 animate-pulse bg-white p-8 rounded-full shadow-inner">
-                    <Icon size={120}>💳</Icon>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-3xl font-black text-blue-900 mb-2">화면을 터치해 주세요</h3>
-                  </div>
-                  <div className="bg-yellow-400 px-10 py-4 rounded-full text-2xl font-black shadow-lg">시작하기</div>
-                </div>
-              )}
-
-              {step === 'SERVICE_SELECT' && (
-                <div className="grid grid-cols-2 gap-4 h-full py-2">
-                  {[
-                    { id: 'DEPOSIT', label: '현금 입금', sub: '카드 넣기', icon: '👛', color: 'bg-emerald-600' },
-                    { id: 'WITHDRAW', label: '현금 출금', sub: '카드 넣기', icon: '🤲', color: 'bg-blue-700' },
-                    { id: 'TRANSFER', label: '계좌 이체', sub: '카드 넣기', icon: '↔️', color: 'bg-orange-600' },
-                    { id: 'PASSBOOK', label: '통장 정리', sub: null, icon: '📖', color: 'bg-purple-700' },
-                  ].map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => {
-                        if (item.id === 'PASSBOOK') navigateTo('PASSBOOK_INSERT', item.id);
-                        else if (item.id === 'TRANSFER') navigateTo('BANK_SELECT', item.id);
-                        else navigateTo('PIN_INPUT', item.id);
-                      }}
-                      className={`${item.color} text-white p-4 rounded-3xl flex flex-col items-center justify-center gap-2 shadow-md active:scale-95 transition-all`}
-                    >
-                      <Icon size={40}>{item.icon}</Icon>
-                      <div className="flex flex-col items-center leading-tight">
-                        <span className="text-2xl font-black">{item.label}</span>
-                        {item.sub && <span className="text-sm font-bold opacity-80 mt-1">{item.sub}</span>}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {step === 'PASSBOOK_INSERT' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-10">
-                  <div className="relative w-72 h-48 bg-slate-200 border-x-4 border-t-4 border-slate-300 rounded-t-xl overflow-hidden shadow-inner">
-                    <div className="absolute top-8 left-1/2 -translate-x-1/2 w-64 h-1 bg-slate-800 shadow-[0_0_10px_rgba(0,0,0,0.5)]"></div>
-                    <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-                      <div className="w-56 h-40 bg-purple-100 border-2 border-purple-300 rounded shadow-md flex items-center justify-center">
-                        <div className="w-full h-0.5 bg-purple-200 absolute top-1/2"></div>
-                        <Icon size={60} className="text-purple-400">📖</Icon>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-center px-4">
-                    <p className="text-xl font-bold text-slate-600 mb-6 italic">마지막 인쇄된 페이지를 펴주세요.</p>
-                    <button onClick={() => navigateTo('PASSBOOK_PRINTING')} className="bg-blue-900 text-white px-10 py-6 rounded-2xl text-2xl font-black shadow-xl active:scale-95">
-                      통장을 넣었습니다
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {step === 'PASSBOOK_PRINTING' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-8">
-                  <div className="relative">
-                    <div className="w-32 h-32 border-[12px] border-slate-100 border-t-purple-600 rounded-full animate-spin"></div>
-                    <div className="absolute inset-0 flex items-center justify-center text-purple-600">
-                      <Icon size={40}>🖨️</Icon>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-3xl font-black text-slate-800">통장을 정리합니다</h3>
-                    <p className="text-lg text-slate-500 font-bold mt-2 font-mono">치익- 치익- (인쇄 중...)</p>
-                  </div>
-                </div>
-              )}
-
-              {step === 'BANK_SELECT' && (
-                <div className="grid grid-cols-2 gap-3 h-full overflow-y-auto pr-1">
-                  {BANKS.map((bank) => (
-                    <button key={bank} onClick={() => { setTargetBank(bank); navigateTo('ACCOUNT_INPUT'); }} className="bg-white border-4 border-slate-200 p-5 rounded-2xl text-2xl font-black text-slate-700 active:border-blue-500 active:bg-blue-50 transition-all h-24">
-                      {bank}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {step === 'PIN_INPUT' && (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <div className="flex gap-4 mb-6">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className={`w-14 h-14 rounded-xl border-4 flex items-center justify-center text-3xl ${inputVal.length >= i ? 'bg-blue-900 border-blue-900 text-white' : 'bg-white border-slate-300'}`}>
-                        {inputVal.length >= i ? '●' : ''}
-                      </div>
-                    ))}
-                  </div>
-                  <Keypad />
-                  <button 
-                    disabled={inputVal.length < 4}
-                    onClick={() => {
-                      setInputVal(''); 
-                      if (service === 'DEPOSIT') navigateTo('CASH_INSERT');
-                      else if (service === 'WITHDRAW') navigateTo('AMOUNT_INPUT');
-                      else navigateTo('PROCESSING');
-                    }}
-                    className={`w-full max-w-[340px] mt-6 py-5 rounded-2xl text-3xl font-black shadow-lg transition-all ${inputVal.length < 4 ? 'bg-slate-300 text-slate-500' : 'bg-blue-900 text-white active:scale-95'}`}
-                  >
-                    확인
-                  </button>
-                </div>
-              )}
-
-              {step === 'CASH_INSERT' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-10">
-                  <div className="relative w-64 h-40 bg-slate-800 rounded-t-lg border-x-8 border-t-8 border-slate-600">
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-56 h-4 bg-blue-400 rounded-full animate-pulse shadow-[0_0_15px_rgba(96,165,250,0.8)]"></div>
-                    <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 animate-bounce">
-                      <div className="w-48 h-24 bg-emerald-500 rounded border-2 border-emerald-700 flex items-center justify-center shadow-lg">
-                        <span className="text-white font-black text-xl">현금 (만원권)</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-xl font-bold text-slate-600">투입구가 열렸습니다.</p>
-                    <button onClick={() => navigateTo('CASH_COUNT')} className="mt-8 bg-blue-900 text-white px-10 py-5 rounded-2xl text-2xl font-black shadow-xl active:scale-95">
-                      현금을 넣었습니다
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {step === 'CASH_COUNT' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-8">
-                  <div className="relative">
-                    <div className="w-32 h-32 border-[12px] border-slate-100 border-t-emerald-500 rounded-full animate-spin"></div>
-                    <div className="absolute inset-0 flex items-center justify-center text-emerald-600">
-                      <Icon size={40}>🪙</Icon>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-3xl font-black text-slate-800">금액을 확인 중...</h3>
-                    <p className="text-lg text-slate-500 font-bold mt-2 font-mono">드르륵... 드르륵...</p>
-                  </div>
-                </div>
-              )}
-
-              {step === 'AMOUNT_CONFIRM' && (
-                <div className="h-full flex flex-col items-center justify-center">
-                  <div className="w-full bg-white rounded-3xl p-8 shadow-inner border-2 border-emerald-100 space-y-6">
-                    <h3 className="text-xl font-bold text-slate-400 text-center">인식된 금액</h3>
-                    <div className="text-center border-y-2 py-6 border-slate-50">
-                      <span className="text-5xl font-black text-emerald-600">{formatAmount(autoCountAmount)}</span>
-                      <span className="text-2xl font-bold text-slate-400 ml-2">원</span>
-                    </div>
-                    <div className="flex justify-between text-lg font-bold text-slate-500 px-2">
-                      <span>만원권</span>
-                      <span>5 매</span>
-                    </div>
-                  </div>
-                  <div className="w-full mt-10 space-y-4">
-                    <button onClick={() => { setInputVal(autoCountAmount.toString()); navigateTo('PROCESSING'); }} className="w-full bg-blue-900 text-white py-6 rounded-2xl text-3xl font-black shadow-lg active:scale-95">
-                      확인 (입력 완료)
-                    </button>
-                    <button onClick={() => navigateTo('CASH_INSERT')} className="w-full bg-slate-200 text-slate-700 py-4 rounded-2xl text-xl font-black">
-                      다시 넣기 (반환)
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {(step === 'ACCOUNT_INPUT' || step === 'AMOUNT_INPUT') && (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <div className="w-full bg-white border-b-4 border-blue-900 p-4 text-center rounded-t-xl shadow-inner mb-3">
-                    <span className={`${step === 'ACCOUNT_INPUT' ? 'text-3xl' : 'text-4xl'} font-black tracking-tighter text-blue-900`}>
-                      {step === 'ACCOUNT_INPUT' ? formatAccountNumber(inputVal) : formatAmount(inputVal)}
-                      <span className="text-xl ml-2 font-bold text-slate-400">{step === 'AMOUNT_INPUT' ? '원' : ''}</span>
-                    </span>
-                  </div>
-                  <Keypad />
-                  <button 
-                    disabled={(step === 'ACCOUNT_INPUT' && inputVal.length < 12) || (step === 'AMOUNT_INPUT' && !inputVal)}
-                    onClick={() => {
-                      if (step === 'ACCOUNT_INPUT') {
-                        setInputVal(''); 
-                        navigateTo('AMOUNT_INPUT');
-                      } else {
-                        navigateTo('CONFIRM');
-                      }
-                    }}
-                    className={`w-full max-w-[340px] mt-4 py-5 rounded-2xl text-3xl font-black shadow-lg transition-all ${((step === 'ACCOUNT_INPUT' && inputVal.length < 12) || (step === 'AMOUNT_INPUT' && !inputVal)) ? 'bg-slate-300 text-slate-500' : 'bg-blue-900 text-white active:scale-95'}`}
-                  >
-                    입력 완료
-                  </button>
-                </div>
-              )}
-
-              {step === 'CONFIRM' && (
-                <div className="bg-white border-2 border-slate-200 rounded-3xl p-6 flex flex-col h-full shadow-inner">
-                  <h3 className="text-xl font-bold text-slate-400 mb-4 text-center">거래 내용 확인</h3>
-                  <div className="space-y-6 text-2xl font-bold">
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="text-slate-500">종류</span>
-                      <span className="text-blue-900">{service === 'TRANSFER' ? '계좌 이체' : service === 'DEPOSIT' ? '현금 입금' : '현금 출금'}</span>
-                    </div>
-                    {service === 'TRANSFER' && (
-                      <div className="flex justify-between border-b pb-2">
-                        <span className="text-slate-500">은행</span>
-                        <span className="text-slate-800">{targetBank}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between items-center pt-2">
-                      <span className="text-slate-500">금액</span>
-                      <span className="text-3xl font-black text-orange-600">{formatAmount(inputVal)} 원</span>
-                    </div>
-                  </div>
-                  <div className="mt-auto flex flex-col gap-3">
-                    <button onClick={() => navigateTo('PROCESSING')} className="bg-blue-900 text-white py-6 rounded-2xl text-3xl font-black shadow-lg">네, 맞습니다</button>
-                    <button onClick={goBack} className="bg-slate-200 text-slate-700 py-4 rounded-2xl text-xl font-black">아니오 (수정)</button>
-                  </div>
-                </div>
-              )}
-
-              {step === 'PROCESSING' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-8">
-                  <div className="w-32 h-32 border-[12px] border-slate-100 border-t-blue-900 rounded-full animate-spin"></div>
-                  <div className="text-center">
-                    <h3 className="text-3xl font-black text-slate-800 mb-2">처리 중입니다</h3>
-                    <p className="text-lg text-slate-500 font-bold">잠시만 기다려 주세요.</p>
-                  </div>
-                </div>
-              )}
-
-              {step === 'SUCCESS' && (
-                <div className="h-full flex flex-col items-center justify-center space-y-6 animate-in zoom-in duration-500">
-                  <div className="bg-emerald-100 p-8 rounded-full text-emerald-600 shadow-lg">
-                    <Icon size={100}>✅</Icon>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-4xl font-black text-slate-800 mb-2">{service === 'PASSBOOK' ? '완료!' : '성공!'}</h3>
-                    <p className="text-xl text-slate-600 font-black break-keep whitespace-pre-line">
-                      {service === 'PASSBOOK' ? '통장 정리가 종료되었습니다.' : '현금과 명세표를\n확인해 주세요.'}
-                    </p>
-                  </div>
-                  <button onClick={resetHome} className="bg-blue-900 text-white px-12 py-5 rounded-3xl text-2xl font-black shadow-xl mt-4">
-                    메인으로 가기
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {step !== 'HOME' && step !== 'SUCCESS' && step !== 'PROCESSING' && step !== 'CASH_COUNT' && step !== 'PASSBOOK_PRINTING' && (
-              <div className="bg-white p-4 border-t-2 border-slate-100 flex justify-between gap-3">
-                <button onClick={goBack} className="flex-1 flex items-center justify-center gap-2 bg-slate-100 text-slate-600 py-4 rounded-xl text-xl font-black active:bg-slate-200">
-                  ← 이전
-                </button>
-                <button onClick={resetHome} className="flex-1 flex items-center justify-center gap-2 bg-red-50 text-red-600 border-2 border-red-100 py-4 rounded-xl text-xl font-black active:bg-red-100">
-                  ✕ 취소
-                </button>
-              </div>
-            )}
-
-            <div className="bg-slate-50 p-2 text-center text-slate-400 font-bold text-[10px] uppercase tracking-wider">
-              NH Senior Training Simulator
-            </div>
-          </div>
+<!-- 주문 확인 모달 -->
+<div id="review-modal" class="modal-overlay">
+    <div class="bg-white w-full rounded-3xl p-6 flex flex-col max-h-[75vh]">
+        <h2 class="text-xl font-black mb-4 text-center border-b pb-3">주문 내용을 확인하세요</h2>
+        <div id="cart-items-list" class="flex-1 overflow-y-auto mb-4"></div>
+        <div class="flex gap-2">
+            <button onclick="closeModal('review-modal')" class="flex-1 bg-zinc-200 py-4 rounded-xl font-black text-lg">닫기</button>
+            <button onclick="finalOrder()" class="flex-1 bg-red-600 text-white py-4 rounded-xl font-black text-lg">진짜 주문</button>
         </div>
-      );
+    </div>
+</div>
+
+<!-- 알림 모달 -->
+<div id="alert-modal" class="modal-overlay">
+    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl w-full mx-4">
+        <div id="alert-icon" class="text-5xl mb-3">✅</div>
+        <p id="alert-text" class="text-xl font-black mb-6 leading-relaxed"></p>
+        <button onclick="closeModal('alert-modal')" class="w-full bg-zinc-900 text-white py-4 rounded-xl font-black text-lg">확인</button>
+    </div>
+</div>
+
+<script>
+    const menuData = {
+        best: [
+            { id: 1, name: "땡할머니 보쌈", price: 35000, type: "BOSSAM", color: "bg-orange-500" },
+            { id: 2, name: "비빔 막국수", price: 9000, type: "NOODLE", color: "bg-teal-500" },
+            { id: 3, name: "추천 세트", price: 42000, type: "SET", color: "bg-red-500" },
+            { id: 4, name: "가족 보쌈", price: 55000, type: "FAMILY", color: "bg-zinc-800" }
+        ],
+        main: [
+            { id: 5, name: "한방 보쌈", price: 33000, type: "MEAT", color: "bg-red-500" },
+            { id: 6, name: "불족발", price: 38000, type: "HOT", color: "bg-zinc-800" }
+        ],
+        side: [
+            { id: 7, name: "해물파전", price: 15000, type: "PAJEON", color: "bg-green-600" },
+            { id: 8, name: "감자전", price: 12000, color: "bg-yellow-600", type: "JEON" }
+        ],
+        drink: [
+            { id: 9, name: "시원한 맥주", price: 5000, type: "BEER", color: "bg-blue-600" },
+            { id: 10, name: "소주", price: 5000, type: "SOJU", color: "bg-emerald-500" }
+        ]
     };
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+    let cart = [];
+    let currentCategory = 'best';
+
+    function renderMenu() {
+        const grid = document.getElementById('menu-grid');
+        grid.innerHTML = '';
+        
+        menuData[currentCategory].forEach(item => {
+            const div = document.createElement('div');
+            div.className = "menu-card";
+            div.innerHTML = `
+                <div class="card-img ${item.color}">${item.type}</div>
+                <div class="p-3 flex flex-col flex-1">
+                    <h3 class="text-base font-black text-zinc-800 leading-tight">${item.name}</h3>
+                    <p class="text-red-600 font-black text-base mt-1">${item.price.toLocaleString()}원</p>
+                    <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})" class="add-btn mt-3">담기</button>
+                </div>
+            `;
+            grid.appendChild(div);
+        });
+    }
+
+    function changeCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('.cat-item').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('cat-' + cat).classList.add('active');
+        renderMenu();
+        document.getElementById('menu-grid').scrollTop = 0;
+    }
+
+    function addToCart(id, name, price) {
+        const existing = cart.find(item => item.id === id);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ id, name, price, quantity: 1 });
+        }
+        updateStatus();
+    }
+
+    function updateStatus() {
+        const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+        const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        
+        document.getElementById('cart-count').innerText = count;
+        document.getElementById('total-price').innerText = total.toLocaleString() + '원';
+    }
+
+    function showOrderReview() {
+        if(cart.length === 0) {
+            customAlert("❌ 메뉴를 먼저<br>선택해 주세요!", "⚠️");
+            return;
+        }
+        const list = document.getElementById('cart-items-list');
+        list.innerHTML = '';
+        
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flex items-center justify-between border-b border-zinc-100 py-4";
+            itemDiv.innerHTML = `
+                <div class="flex-1 text-left">
+                    <p class="text-lg font-black">${item.name}</p>
+                    <p class="text-zinc-500 font-bold text-sm">${(item.price * item.quantity).toLocaleString()}원</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="changeQty(${item.id}, -1)" class="w-10 h-10 bg-zinc-100 rounded-full text-xl font-black">-</button>
+                    <span class="text-xl font-black w-6 text-center">${item.quantity}</span>
+                    <button onclick="changeQty(${item.id}, 1)" class="w-10 h-10 bg-zinc-100 rounded-full text-xl font-black text-red-600">+</button>
+                </div>
+            `;
+            list.appendChild(itemDiv);
+        });
+        
+        document.getElementById('review-modal').style.display = 'flex';
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if(item) {
+            item.quantity += delta;
+            if(item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+            if(cart.length === 0) closeModal('review-modal');
+            else showOrderReview();
+            updateStatus();
+        }
+    }
+
+    function finalOrder() {
+        closeModal('review-modal');
+        customAlert("주문이 완료되었습니다!<br>맛있게 준비해 드릴게요.", "🔥");
+        cart = [];
+        updateStatus();
+    }
+
+    function showStaffCall() {
+        customAlert("직원을 불렀습니다.<br>잠시만 기다려주세요.", "🔔");
+    }
+
+    function customAlert(text, icon = "✅") {
+        document.getElementById('alert-text').innerHTML = text;
+        document.getElementById('alert-icon').innerText = icon;
+        document.getElementById('alert-modal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    window.onload = renderMenu;
+</script>
+
 </body>
 </html>
