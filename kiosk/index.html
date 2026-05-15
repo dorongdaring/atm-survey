@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>시니어 주문 연습기 - 주문바 축소</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            color: #000000;
+            margin: 0;
+            overflow: hidden;
+            touch-action: manipulation;
+            display: flex;
+            justify-content: center;
+        }
 
+        .app-wrapper {
+            width: 100vw;
+            height: 100vh;
+            max-width: 500px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* 카테고리 영역 */
+        .category-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: #222;
+            padding: 8px 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .category-container::-webkit-scrollbar { display: none; }
+
+        .cat-item {
+            padding: 10px 18px;
+            margin: 0 4px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ccc;
+            cursor: pointer;
+        }
+        .cat-item.active {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        /* 메뉴 그리드 설정: 겹침 방지를 위해 row-gap 확보 */
+        .menu-grid {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 12px;
+            row-gap: 30px; 
+            grid-auto-rows: min-content;
+            padding-bottom: 160px; /* 하단바 축소에 맞춰 여백 조정 */
+            background-color: #fdfdfd;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid #eee;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+            height: fit-content;
+        }
+
+        .card-img {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 900;
+        }
+
+        /* 담기 버튼 */
+        .add-btn {
+            background-color: #262626;
+            color: white;
+            padding: 12px 0;
+            margin: 8px;
+            border-radius: 0.6rem;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+        .add-btn:active { background-color: #000; transform: scale(0.96); }
+
+        /* 하단 주문바 (50% 축소 디자인) */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: #111;
+            padding: 10px 15px 15px 15px; /* 패딩 축소 */
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 -8px 15px rgba(0,0,0,0.3);
+            z-index: 50;
+        }
+
+        .order-btn-small {
+            background-color: #ef4444;
+            color: white;
+            width: 100%;
+            padding: 14px; /* 높이 축소 */
+            border-radius: 12px;
+            font-size: 1.3rem; /* 폰트 크기 조정 */
+            font-weight: 900;
+            text-align: center;
+            border: none;
+        }
+        .order-btn-small:active { background-color: #dc2626; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+    <!-- 상단 헤더 -->
+    <div class="bg-zinc-900 p-3 text-center">
+        <h1 class="text-yellow-400 font-black text-lg">실습용 메뉴판</h1>
+        <p class="text-zinc-400 text-[10px] mt-0.5">💡 드시고 싶은 메뉴의 [담기]를 누르세요.</p>
+    </div>
+
+    <!-- 카테고리 -->
+    <div class="category-container" id="category-bar">
+        <div onclick="changeCategory('best')" id="cat-best" class="cat-item active">인기메뉴</div>
+        <div onclick="changeCategory('main')" id="cat-main" class="cat-item">보쌈/족발</div>
+        <div onclick="changeCategory('side')" id="cat-side" class="cat-item">사이드</div>
+        <div onclick="changeCategory('drink')" id="cat-drink" class="cat-item">음료/주류</div>
+    </div>
+
+    <!-- 메뉴 리스트 -->
+    <div id="menu-grid" class="menu-grid">
+        <!-- JS로 메뉴가 생성됩니다 -->
+    </div>
+
+    <!-- 축소된 하단 주문바 -->
+    <div class="bottom-nav">
+        <div class="flex justify-between items-end px-1">
+            <button onclick="showStaffCall()" class="text-white bg-zinc-700 px-3 py-1.5 rounded-lg font-bold text-xs">🔔 직원호출</button>
+            <div class="text-right">
+                <p class="text-zinc-500 text-[10px] font-bold leading-none">총 주문금액</p>
+                <p id="total-price" class="text-yellow-400 text-xl font-black">0원</p>
+            </div>
+        </div>
+        <button onclick="showOrderReview()" id="order-start-btn" class="order-btn-small">
+            주문하기 (<span id="cart-count">0</span>)
+        </button>
+    </div>
+</div>
+
+<!-- 주문 확인 모달 -->
+<div id="review-modal" class="modal-overlay">
+    <div class="bg-white w-full rounded-3xl p-6 flex flex-col max-h-[75vh]">
+        <h2 class="text-xl font-black mb-4 text-center border-b pb-3">주문 내용을 확인하세요</h2>
+        <div id="cart-items-list" class="flex-1 overflow-y-auto mb-4"></div>
+        <div class="flex gap-2">
+            <button onclick="closeModal('review-modal')" class="flex-1 bg-zinc-200 py-4 rounded-xl font-black text-lg">닫기</button>
+            <button onclick="finalOrder()" class="flex-1 bg-red-600 text-white py-4 rounded-xl font-black text-lg">진짜 주문</button>
+        </div>
+    </div>
+</div>
+
+<!-- 알림 모달 -->
+<div id="alert-modal" class="modal-overlay">
+    <div class="bg-white rounded-3xl p-8 text-center shadow-2xl w-full mx-4">
+        <div id="alert-icon" class="text-5xl mb-3">✅</div>
+        <p id="alert-text" class="text-xl font-black mb-6 leading-relaxed"></p>
+        <button onclick="closeModal('alert-modal')" class="w-full bg-zinc-900 text-white py-4 rounded-xl font-black text-lg">확인</button>
+    </div>
+</div>
+
+<script>
+    const menuData = {
+        best: [
+            { id: 1, name: "땡할머니 보쌈", price: 35000, type: "BOSSAM", color: "bg-orange-500" },
+            { id: 2, name: "비빔 막국수", price: 9000, type: "NOODLE", color: "bg-teal-500" },
+            { id: 3, name: "추천 세트", price: 42000, type: "SET", color: "bg-red-500" },
+            { id: 4, name: "가족 보쌈", price: 55000, type: "FAMILY", color: "bg-zinc-800" }
+        ],
+        main: [
+            { id: 5, name: "한방 보쌈", price: 33000, type: "MEAT", color: "bg-red-500" },
+            { id: 6, name: "불족발", price: 38000, type: "HOT", color: "bg-zinc-800" }
+        ],
+        side: [
+            { id: 7, name: "해물파전", price: 15000, type: "PAJEON", color: "bg-green-600" },
+            { id: 8, name: "감자전", price: 12000, color: "bg-yellow-600", type: "JEON" }
+        ],
+        drink: [
+            { id: 9, name: "시원한 맥주", price: 5000, type: "BEER", color: "bg-blue-600" },
+            { id: 10, name: "소주", price: 5000, type: "SOJU", color: "bg-emerald-500" }
+        ]
+    };
+
+    let cart = [];
+    let currentCategory = 'best';
+
+    function renderMenu() {
+        const grid = document.getElementById('menu-grid');
+        grid.innerHTML = '';
+        
+        menuData[currentCategory].forEach(item => {
+            const div = document.createElement('div');
+            div.className = "menu-card";
+            div.innerHTML = `
+                <div class="card-img ${item.color}">${item.type}</div>
+                <div class="p-3 flex flex-col flex-1">
+                    <h3 class="text-base font-black text-zinc-800 leading-tight">${item.name}</h3>
+                    <p class="text-red-600 font-black text-base mt-1">${item.price.toLocaleString()}원</p>
+                    <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})" class="add-btn mt-3">담기</button>
+                </div>
+            `;
+            grid.appendChild(div);
+        });
+    }
+
+    function changeCategory(cat) {
+        currentCategory = cat;
+        document.querySelectorAll('.cat-item').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('cat-' + cat).classList.add('active');
+        renderMenu();
+        document.getElementById('menu-grid').scrollTop = 0;
+    }
+
+    function addToCart(id, name, price) {
+        const existing = cart.find(item => item.id === id);
+        if (existing) {
+            existing.quantity++;
+        } else {
+            cart.push({ id, name, price, quantity: 1 });
+        }
+        updateStatus();
+    }
+
+    function updateStatus() {
+        const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+        const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        
+        document.getElementById('cart-count').innerText = count;
+        document.getElementById('total-price').innerText = total.toLocaleString() + '원';
+    }
+
+    function showOrderReview() {
+        if(cart.length === 0) {
+            customAlert("❌ 메뉴를 먼저<br>선택해 주세요!", "⚠️");
+            return;
+        }
+        const list = document.getElementById('cart-items-list');
+        list.innerHTML = '';
+        
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = "flex items-center justify-between border-b border-zinc-100 py-4";
+            itemDiv.innerHTML = `
+                <div class="flex-1 text-left">
+                    <p class="text-lg font-black">${item.name}</p>
+                    <p class="text-zinc-500 font-bold text-sm">${(item.price * item.quantity).toLocaleString()}원</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="changeQty(${item.id}, -1)" class="w-10 h-10 bg-zinc-100 rounded-full text-xl font-black">-</button>
+                    <span class="text-xl font-black w-6 text-center">${item.quantity}</span>
+                    <button onclick="changeQty(${item.id}, 1)" class="w-10 h-10 bg-zinc-100 rounded-full text-xl font-black text-red-600">+</button>
+                </div>
+            `;
+            list.appendChild(itemDiv);
+        });
+        
+        document.getElementById('review-modal').style.display = 'flex';
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if(item) {
+            item.quantity += delta;
+            if(item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+            if(cart.length === 0) closeModal('review-modal');
+            else showOrderReview();
+            updateStatus();
+        }
+    }
+
+    function finalOrder() {
+        closeModal('review-modal');
+        customAlert("주문이 완료되었습니다!<br>맛있게 준비해 드릴게요.", "🔥");
+        cart = [];
+        updateStatus();
+    }
+
+    function showStaffCall() {
+        customAlert("직원을 불렀습니다.<br>잠시만 기다려주세요.", "🔔");
+    }
+
+    function customAlert(text, icon = "✅") {
+        document.getElementById('alert-text').innerHTML = text;
+        document.getElementById('alert-icon').innerText = icon;
+        document.getElementById('alert-modal').style.display = 'flex';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    window.onload = renderMenu;
+</script>
+
+</body>
+</html>
