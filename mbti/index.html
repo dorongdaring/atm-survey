@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 유형별 중학생 맞춤 공부법 가이드</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <span class="bg-indigo-500/50 text-indigo-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">중학생 맞춤형 자기주도학습</span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold mt-2 tracking-tight">MBTI 16가지 성향별 공부 비법</h1>
+                    <p class="text-indigo-100 mt-2 text-sm sm:text-base">나에게 딱 맞는 공부법으로 내신 만점과 공부 습관을 동시에 잡아보세요!</p>
+                </div>
+                <div class="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10 hidden md:block">
+                    <p class="text-xs text-indigo-200">공부 습관 형성의 골든 타임</p>
+                    <p class="text-lg font-bold">💡 중등 공부가 평생을 갑니다</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        
+        <!-- 4가지 선호 지표 퀵 가이드 -->
+        <section class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 mb-8">
+            <h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <i data-lucide="compass" class="text-indigo-600 w-5 h-5"></i>
+                학습 성향을 결정하는 MBTI 4가지 지표
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 bg-red-50/50 rounded-2xl border border-red-100/60">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded">에너지 방향</span>
+                        <span class="text-xs text-slate-500">외향 vs 내향</span>
+                    </div>
+                    <p class="text-sm"><strong class="text-red-700">E (그룹 공부):</strong> 친구들과 질문을 나누고 토론할 때 능률 상승</p>
+                    <p class="text-sm mt-1"><strong class="text-red-800">I (개인 공부):</strong> 방해받지 않는 혼자만의 조용한 공간에서 집중력 최고</p>
+                </div>
+                <div class="p-4 bg-orange-50/50 rounded-2xl border border-orange-100/60">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-orange-700 bg-orange-100 px-2 py-0.5 rounded">정보 수집</span>
+                        <span class="text-xs text-slate-500">감각 vs 직관</span>
+                    </div>
+                    <p class="text-sm"><strong class="text-orange-700">S (단계별 암기):</strong> 교과서 순서대로 꼼꼼히, 기출문제 풀이 중심</p>
+                    <p class="text-sm mt-1"><strong class="text-orange-800">N (개념적 이해):</strong> 전체 흐름, 마인드맵, 원리와 개념 간의 연결 선호</p>
+                </div>
+                <div class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100/60">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">의사 결정</span>
+                        <span class="text-xs text-slate-500">사고 vs 감정</span>
+                    </div>
+                    <p class="text-sm"><strong class="text-emerald-700">T (논리적 설득):</strong> 정확한 정답과 원인 분석, 오답 노트 중심</p>
+                    <p class="text-sm mt-1"><strong class="text-emerald-800">F (정서적 지지):</strong> 칭찬과 격려, 선생님과의 관계가 성적에 큰 영향</p>
+                </div>
+                <div class="p-4 bg-blue-50/50 rounded-2xl border border-blue-100/60">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">행동 양식</span>
+                        <span class="text-xs text-slate-500">판단 vs 인식</span>
+                    </div>
+                    <p class="text-sm"><strong class="text-blue-700">J (계획형):</strong> 일간/주간 플래너 작성 필수, 정해진 진도대로 학습</p>
+                    <p class="text-sm mt-1"><strong class="text-blue-800">P (자율형):</strong> 유연한 공부 방식, 그날 꽂히는 과목을 몰입해서 끝내기</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Playground Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Side: MBTI Selector -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 sticky top-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="text-amber-500 w-5 h-5"></i>
+                        내 MBTI 유형 선택하기
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-4">공부 성향이 궁금한 유형을 클릭하세요!</p>
+                    
+                    <!-- Grid of 16 MBTIs -->
+                    <div class="grid grid-cols-4 gap-2 mb-6" id="mbti-grid">
+                        <!-- Will be dynamically injected -->
+                    </div>
+
+                    <!-- Custom Scheduler Trigger Card -->
+                    <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center">
+                        <p class="text-xs text-indigo-700 font-bold mb-1">성향 맞춤 스케줄러 생성</p>
+                        <p class="text-xs text-slate-600 mb-3">선택한 유형의 추천 시간표 예시를 확인하세요.</p>
+                        <button onclick="generateSchedule()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition duration-200 shadow-md shadow-indigo-200 flex items-center justify-center gap-2">
+                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                            맞춤형 공부 일과표 보기
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Detailed Dashboard -->
+            <div class="lg:col-span-8 space-y-6">
+                <!-- Info Display Card -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100 relative overflow-hidden" id="details-card">
+                    <!-- Dynamic Accent Color bar will slide in -->
+                    <div class="absolute top-0 left-0 right-0 h-2 bg-indigo-600" id="card-top-bar"></div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mt-2">
+                        <div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-4xl font-extrabold text-indigo-600 tracking-wider" id="selected-mbti">ESTJ</span>
+                                <span class="bg-indigo-50 text-indigo-700 font-semibold text-xs px-3 py-1 rounded-full border border-indigo-100" id="selected-title">현실적인 관리자형 경영자</span>
+                            </div>
+                            <p class="text-slate-500 text-sm mt-2" id="selected-slogan">"계획과 성과가 눈에 보여야 진짜 공부다!"</p>
+                        </div>
+                        <div class="flex gap-2" id="tag-container">
+                            <!-- Target elements like #꼼꼼함 #시간엄수 -->
+                        </div>
+                    </div>
+
+                    <!-- Core Attributes & Strengths / Weaknesses -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 py-6">
+                        <div class="bg-slate-50/70 rounded-2xl p-4 border border-slate-100">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                <i data-lucide="thumbs-up" class="w-4 h-4 text-emerald-500"></i> 학습 강점
+                            </h4>
+                            <p class="text-sm font-semibold text-slate-800" id="selected-strengths-summary">체계적이고 책임감이 강함</p>
+                            <ul class="text-xs text-slate-600 mt-2 list-disc list-inside space-y-1" id="selected-strengths-details">
+                                <li>계획된 일정대로 수행하는 능력이 우수함</li>
+                                <li>암기 과목이나 규칙적인 복습에 뛰어남</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-50/70 rounded-2xl p-4 border border-slate-100">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-500"></i> 주의해야 할 점 (취약점)
+                            </h4>
+                            <p class="text-sm font-semibold text-slate-800" id="selected-weakness-summary">유연성 부족 및 틀 고착화</p>
+                            <ul class="text-xs text-slate-600 mt-2 list-disc list-inside space-y-1" id="selected-weakness-details">
+                                <li>새로운 응용 문제나 창의적 과제에서 막힐 수 있음</li>
+                                <li>계획이 조금이라도 틀어지면 과도한 스트레스 호소</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Study Methods -->
+                    <div class="border-t border-slate-100 pt-6 space-y-4">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="book-open" class="text-indigo-600 w-5 h-5"></i>
+                            추천 공부 전략 3가지
+                        </h4>
+                        <div class="grid grid-cols-1 gap-3" id="study-strategies">
+                            <!-- Dynamic Injection of 3 strategy cards -->
+                        </div>
+                    </div>
+
+                    <!-- Slump & Parents Guide -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-slate-100 pt-6 mt-6">
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                                <i data-lucide="heart-crack" class="text-rose-500 w-4 h-4"></i>
+                                중등 맞춤형 슬럼프 처방
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed bg-rose-50/30 p-3 rounded-xl border border-rose-100/50" id="selected-slump">
+                                성적이 정체되거나 지나치게 목표 지향적이 되어 번아웃이 올 수 있습니다. 성취 지향성을 낮추고 하루쯤은 보상 데이를 주어 완전히 학습과 단절되어 쉴 수 있게 해주세요.
+                            </p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+                                <i data-lucide="users" class="text-blue-500 w-4 h-4"></i>
+                                학부모/교사 지도 가이드
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed bg-blue-50/30 p-3 rounded-xl border border-blue-100/50" id="selected-parent-tip">
+                                결과 중심의 칭찬보다는 과정에 대한 합리적인 칭찬이 잘 통합니다. 공부 장소는 되도록 단정하고 정돈된 전형적인 독서실이나 방이 잘 맞습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Daily Schedule Simulator (Modal/Card) -->
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hidden transition-all duration-300" id="schedule-card">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="calendar" class="text-indigo-600 w-5 h-5"></i>
+                            <span id="schedule-title-mbti">ESTJ</span> 유형 맞춤 하루 공부 시간표 예시
+                        </h3>
+                        <button onclick="closeSchedule()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg hover:bg-slate-50">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="flow-root">
+                        <ul role="list" class="-mb-8" id="schedule-timeline">
+                            <!-- Dynamic schedule items -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <p class="text-sm">※ 본 가이드는 중학생의 발달 단계 및 일반적인 MBTI 지표 특징을 결합하여 가공한 자기주도학습 추천 자료입니다.</p>
+            <p class="text-xs text-slate-500">© 2026 MBTI 중학 학습 성향 솔루션. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Full MBTI Dataset mapped to Middle School Study Strategies
+        const mbtiData = {
+            ISTJ: {
+                title: "책임감 있는 모범생형",
+                slogan: "정해진 계획과 교과서가 가장 든든한 등대다.",
+                tags: ["#체계적", "#성실함", "#정석학습"],
+                theme: "indigo",
+                strengthsSummary: "정해진 규칙과 정석을 따르는 확실한 복습력",
+                strengthsDetails: [
+                    "매일 정해진 시간표대로 일관성 있게 학습할 수 있습니다.",
+                    "교과서 구석구석 세세한 디테일까지 놓치지 않고 꼼꼼히 정리합니다."
+                ],
+                weaknessSummary: "범위를 벗어나거나 새로운 유형을 접할 때의 당황",
+                weaknessDetails: [
+                    "교과서 밖 심화 응용 문제나 새로운 유형 출제 시 대처법이 굳어지기 쉽습니다.",
+                    "전체적인 큰 흐름을 읽는 것을 귀찮아할 수 있습니다."
+                ],
+                strategies: [
+                    { title: "누적식 백지 복습", text: "매일 배운 내용을 완벽히 암기한 후 백지에 스스로 적어보며 빠진 단어를 체크하세요." },
+                    { title: "문제 유형화 오답 노트", text: "신유형 문제들을 만나면 당황하지 않게 정밀히 풀이 과정을 분석해 나만의 정형화된 풀이 리스트를 만드세요." },
+                    { title: "구조적 목차 확인", text: "공부 시작 전에 전체 단원 목차를 보며 내가 지금 어느 맥락을 공부하는지 숲을 먼저 확인하세요." }
+                ],
+                slump: "계획이 꼬이거나 점수가 정체되면 무리해서 자습 시간을 늘립니다. 자책하기 쉬운 시기이므로 잠시 계획표를 단순화하고 하루 단 1시간이라도 가벼운 취미를 통해 뇌를 쉬게 하세요.",
+                parentTip: "수치화된 성적 목표를 스스로 세우는 편입니다. 아이의 노력을 당연하게 여기기보다 계획대로 성실히 실천한 행동 자체를 인정하고 보상해 주는 것이 좋습니다.",
+                schedule: [
+                    { time: "08:00 - 08:30", action: "오늘 공부할 학습 목표 및 스케줄러 꼼꼼히 점검하기" },
+                    { time: "16:30 - 18:00", action: "교과서 위주의 기본 개념 완벽 암기 및 기출 문제 유형별 정밀 풀이" },
+                    { time: "19:00 - 21:00", action: "오답 노트 정리 및 틀린 문제와 연계된 수학 공식/핵심 개념 재증명" },
+                    { time: "21:00 - 22:00", action: "백지 한 장에 오늘 완벽하게 이해한 내용 적어서 빈틈 점검 및 취침 준비" }
+                ]
+            },
+            ISFJ: {
+                title: "따뜻하고 꼼꼼한 지킴이형",
+                slogan: "성실함과 차근차근한 완성이 최고의 무기다.",
+                tags: ["#꾸준함", "#노트필기", "#수행평가만점"],
+                theme: "emerald",
+                strengthsSummary: "섬세한 기록력과 훌륭한 수행평가 관리력",
+                strengthsDetails: [
+                    "선생님의 농담 하나까지 적어두는 완벽한 필기력과 성실함을 자랑합니다.",
+                    "성실히 제출해야 하는 중학교 수행평가 및 서술형 평가에서 만점을 받기 수월합니다."
+                ],
+                weaknessSummary: "과도한 긴장과 완벽주의로 인한 시간 배분 실패",
+                weaknessDetails: [
+                    "시험장에서 1번 문제에서 막히면 너무 크게 긴장해 전체 시험을 흔드는 경향이 있습니다.",
+                    "완벽하게 암기하지 못했다고 느끼면 진도를 나가지 못합니다."
+                ],
+                strategies: [
+                    { title: "타이머 연동 문제 풀이", text: "시험 상황과 동일하게 제한 시간을 타이트하게 둔 상태에서 빠르게 문제를 넘겨가며 푸는 연습을 해야 합니다." },
+                    { title: "깔끔한 단권화 필기노트", text: "교과서, 자습서, 유인물의 정보를 한 권의 노트에 정성 들여 통합 정리하는 것이 기억에 오래 남습니다." },
+                    { title: "쉬운 문제부터 풀기 습관", text: "실제 시험을 볼 때는 모르는 문제를 과감히 패스하고, 아는 것부터 맞혀서 안도감을 느끼는 연습이 필수적입니다." }
+                ],
+                slump: "주변 기대에 부응하지 못했다는 압박이나 비난을 받으면 마음에 문을 닫아버립니다. 슬럼프 시기에는 격려 편지와 함께 조용한 힐링 시간을 선물해 주세요.",
+                parentTip: "사소한 실수를 두고 자책을 심하게 할 수 있습니다. '누구나 실수할 수 있어, 이번에도 넌 충분히 열심히 잘 준비했어'라는 따뜻한 정서적 안정이 큰 성적 원동력이 됩니다.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "그날 배운 과목의 교과서 필기 보완 및 오색 펜을 활용한 깔끔한 단권화" },
+                    { time: "17:30 - 19:00", action: "수행평가 미리미리 과제 해결 및 서술형 예상 예상 답안 작성 연습" },
+                    { time: "20:00 - 21:30", action: "수학/과학 응용 문제 풀이 시 모래시계를 사용하여 문항당 2~3분 컷 훈련" },
+                    { time: "21:30 - 22:00", action: "부족한 과목 가벼운 단어 암기 및 편안하게 마음 가라앉히기" }
+                ]
+            },
+            INFJ: {
+                title: "조용하고 깊이 있는 예언자형",
+                slogan: "배우는 목적과 내면의 동기가 확실해야 진짜 와닿는다.",
+                tags: ["#깊은집중", "#의미부여", "#비밀공부방"],
+                theme: "teal",
+                strengthsSummary: "한번 꽂힌 개념은 심도 있게 파고드는 고도의 몰입감",
+                strengthsDetails: [
+                    "어떤 공식의 증명 과정을 끝까지 추적해 들어가는 등 인과적 통찰력이 우수합니다.",
+                    "조용한 환경이 주어지면 몇 시간이고 고도의 집중력을 발휘합니다."
+                ],
+                weaknessSummary: "기계적인 무지성 암기를 혐오하고 포기하기 쉬움",
+                weaknessDetails: [
+                    "무조건 외우라는 식의 암기 과목(역사, 한문 등)에서 쉽게 싫증을 느낍니다.",
+                    "마음속 불안감과 미래에 대한 생각이 깊어 멍때리는 시간이 많을 수 있습니다."
+                ],
+                strategies: [
+                    { title: "원리와 역사적 흐름 탐색", text: "역사를 배울 때 연도 암기보다는 인물 간의 관계와 스토리 다큐멘터리를 시청하여 맥락을 선이해 해보세요." },
+                    { title: "나만의 비밀 공부 공간", text: "도서관의 구석진 칸막이 책상이나, 1인용 독서실 등 시선이 완벽히 차단된 곳에서 최고의 능률을 보입니다." },
+                    { title: "마음 정리 저널링", text: "공부 시작 전 5분간 마음을 어지럽히는 복잡한 잡생각들을 종이에 훌훌 털어 쓰듯 적고 공부를 바로 시작하세요." }
+                ],
+                slump: "학업 경쟁이 심해지면 혼자 상처받고 불안에 떨기 쉽습니다. 이럴 때는 결과보다는 왜 공부를 하는지 장기적인 본인의 꿈과 연결 지어 이야기를 나눌 때 자연스럽게 탈출합니다.",
+                parentTip: "독단적으로 다그치거나 다그치듯 물어보면 말을 더 아끼게 됩니다. 감정의 흐름을 기다려 주시고 진심으로 아이가 지향하는 성장을 지지해 주세요.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "혼자만의 방에서 소음을 완전히 차단한 후 가장 난도 높은 국어 문학 분석 및 수학 개념서 통독" },
+                    { time: "18:00 - 19:30", action: "역사나 사회 과목의 연도 표 암기가 아닌 전체적인 사건 흐름도를 스케치북에 연결해 그리기" },
+                    { time: "20:30 - 22:00", action: "어려운 수학 킬러 문항 2-3개를 골라 원리와 해답을 심층적으로 완벽 탐구" },
+                    { time: "22:00 - 22:30", action: "내면의 상상이나 일기를 쓰며 하루 정리하기" }
+                ]
+            },
+            INTJ: {
+                title: "전략적 분석가형",
+                slogan: "비효율적인 공부는 죄악이다. 스마트한 시스템을 구축한다.",
+                tags: ["#전략가", "#자기주도적", "#상위권목표"],
+                theme: "purple",
+                strengthsSummary: "치밀하고 거시적인 통찰력 및 강력한 독학력",
+                strengthsDetails: [
+                    "가장 정교한 상위 수준의 계획을 구성하며 혼자 인터넷 강의를 들으며 진도를 뽑는 능력이 최상입니다.",
+                    "성적 정체 요인을 데이터 기반으로 정확하게 셀프 진단하여 메꿔나갑니다."
+                ],
+                weaknessSummary: "과도한 자기 지배와 주관이 개입되는 편협함",
+                weaknessDetails: [
+                    "본인 기준에 불필요해 보이는 교과 과목이나 수행평가를 과감히 무시하려다 종합 내신을 깎아 먹을 수 있습니다.",
+                    "질문이나 주변 피드백을 쉽게 수용하지 않는 고집이 있습니다."
+                ],
+                strategies: [
+                    { title: "최고 수준의 심화서 공부", text: "단순 반복 문제집보다는 극악 수준의 어려운 수학/과학 심화 문제집을 스스로 돌파하며 쾌감을 느껴야 공부가 재밌습니다." },
+                    { title: "인강 배속 진도 뽑기", text: "느린 템포의 오프라인 학원보다는 핵심만 요약한 최고 강사의 인강을 1.5배속으로 집중적으로 수강하는 독학 위주의 방식을 추천합니다." },
+                    { title: "종합 내신 균형 맞추기", text: "본인이 가치 없다고 판단하는 과목도 결국 상위 목표인 대학 입시나 상위 고교 진학에 필수라는 사실을 숫자로 인지해야 합니다." }
+                ],
+                slump: "자신이 세워놓은 이상적인 성적 기준에 흠집이 나면 자존심에 큰 타격을 입고 극도의 차가운 상태가 됩니다. 이때는 조용히 혼자 분석하고 다시 전열을 가다듬을 시간적 자유를 보장해야 합니다.",
+                parentTip: "학부모의 잔소리가 가장 통하지 않고, 감정적 호소 역시 비웃기 십상입니다. 이성적으로 통계 자료나 확실한 논리로 아이를 설득하고, 아이의 방식을 믿고 맡겨두는 것이 제일 현명합니다.",
+                schedule: [
+                    { time: "16:00 - 18:00", action: "선별된 고난도 수학 심화 인강 고배속 시청 및 필기 생략 후 뇌로 바로 이해하기" },
+                    { time: "18:00 - 19:30", action: "수학 고난도 문제집(블랙라벨 등)을 집중적으로 해결하여 완벽 정복" },
+                    { time: "20:30 - 21:30", action: "과학 등 지식 연결이 극대화되는 과목의 마인드맵형 구조적 필기 진행" },
+                    { time: "21:30 - 22:30", action: "철저히 계량화된 오늘 성취도 분석 및 내일 계획 수정 보완 후 칼취침" }
+                ]
+            },
+            ISTP: {
+                title: "만능 해결사 및 장인형",
+                slogan: "가장 최소의 힘으로 최대의 효율과 점수를 낸다.",
+                tags: ["#벼락치기최강", "#실용성", "#미니멀멀티"],
+                theme: "amber",
+                strengthsSummary: "시험 직전 놀라운 집중력과 압축적 정보 소화 능력",
+                strengthsDetails: [
+                    "불필요한 이론에 힘빼지 않고, 당장 시험에 나올 핵심 족보 위주로 파악하는 눈이 좋습니다.",
+                    "실험 과학, 기술가정, 체육 실기 등 도구와 몸을 활용하거나 결과가 뚜렷이 나오는 과목에 뛰어납니다."
+                ],
+                weaknessSummary: "장기적인 공부 계획 실천에 최악의 지구력",
+                weaknessDetails: [
+                    "3~4주 전부터 꾸준히 시험 대비를 하는 것이 지루해 견디지 못하고 늘 극단적인 벼락치기를 행합니다.",
+                    "본인 마음에 와닿지 않는 이론적 개념은 공부하지 않으려고 배척합니다."
+                ],
+                strategies: [
+                    { title: "초압축 벼락치기 시스템화", text: "주변의 계획형 친구의 플래너를 벤치마킹하여 무리하지 않는 단기 계획(일주일 단위)을 타이트하게 짜서 격파식으로 수행하세요." },
+                    { title: "도구와 연동한 흥미 유발", text: "아이패드 필기, 특색 있는 타이머 등 최신 공부 템이나 기기를 과감히 활용하여 공부를 재미있는 미션 게임처럼 만드세요." },
+                    { title: "족보 및 기출 위주 문제 풀기", text: "개념서를 처음부터 다 읽는 지루함보다는, 일단 기출 시험지를 먼저 과감히 풀어본 뒤 틀린 개념 위주로 역추적 암기하는 것이 효율적입니다." }
+                ],
+                slump: "아무것도 하기 싫어지는 귀찮음 슬럼프가 자주 찾아옵니다. 이때 억지로 앉혀놓으면 반발심만 극대화됩니다. 며칠 동안 공부 잔소리를 완벽히 끊고 몸으로 격렬히 움직이는 스포츠나 게임 시간을 보장해 탈출시켜야 합니다.",
+                parentTip: "말수가 적고 귀찮아하는 것처럼 보이지만 머리는 끊임없이 효율을 계산하고 있습니다. 장황하게 훈계하기보다 '내일까지 이거 끝내면 주말 내내 터치 안 함' 같은 직관적이고 쿨한 거래가 잘 먹힙니다.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "아이패드나 스마트 학습 기기를 활용해 그날 배운 핵심만 빠르게 요약 인강 훑기" },
+                    { time: "17:30 - 19:30", action: "기존 출제 족보 및 주변 중학교 기출 시험지를 대량 확보하여 모의고사 실전 테스트" },
+                    { time: "20:30 - 22:00", action: "틀린 문제의 오답 정리를 책에 바로 가볍게 단권화하고 정답이 도출되는 메커니즘 위주 암기" },
+                    { time: "22:00 - 22:30", action: "공부 마감 후 스트레스 해소를 위한 자유 게임 또는 스마트폰 시간 가지고 취침" }
+                ]
+            },
+            ISFP: {
+                title: "호기심 많은 예술가형",
+                slogan: "편안한 마음과 예쁘게 꾸민 나만의 환경이 공부 의욕을 부른다.",
+                tags: ["#시각자료", "#편안함", "#기분파공부"],
+                theme: "rose",
+                strengthsSummary: "감각적이고 세세하게 기억하는 뛰어난 시각적 암기력",
+                strengthsDetails: [
+                    "그림, 도표, 칼라풀한 도식이 포함된 교재를 통째로 사진 찍듯 뇌에 입력하여 연상 암기하는 능력이 탁월합니다.",
+                    "수행평가 중 무언가를 그리고, 만들고, 감상문을 쓰는 예체능 성격의 영역에서 압도적으로 우수합니다."
+                ],
+                weaknessSummary: "마음 상태와 기분에 극도로 크게 흔들리는 집중력",
+                weaknessDetails: [
+                    "친구와 싸우거나, 부모님과 트러블이 있거나, 공부방 분위기가 갑갑하면 펜을 아예 놓아 버립니다.",
+                    "미리미리 해야 하는 힘든 공부를 마냥 미루어 뒤늦게 과제 벼락을 맞기 일쑤입니다."
+                ],
+                strategies: [
+                    { title: "예쁜 다이어리 꾸미기와 플래너 연동", text: "공부 계획표를 귀여운 스티커나 알록달록한 형광펜으로 소소하게 꾸미며 오늘의 할 일을 완수하는 소소한 기쁨을 누리세요." },
+                    { title: "카페형 독서실이나 트인 공간", text: "사방이 꽉 막힌 독서실은 답답함을 유발해 졸음을 부릅니다. 조용한 음악이 흐르고 인테리어가 차분한 스터디 카페가 최적입니다." },
+                    { title: "시각적 마인드맵 그리기", text: "역사나 과학 공부를 할 때 온통 텍스트인 책을 보지 말고 다양한 색깔을 가미한 그림형 연상 노트를 만들어 보세요." }
+                ],
+                slump: "대개 정서적인 외로움이나 피로도가 원인입니다. 평소 아이가 좋아하는 편안한 잠옷을 선물하거나, 좋아하는 음식을 함께 먹으면서 아무 부담 없이 수다를 떠는 것만으로도 슬럼프는 자연스레 소멸합니다.",
+                parentTip: "가장 순종적이고 착하지만, 속으로 깊게 앓는 편입니다. 강압적인 명령이나 성적 지적은 공부 혐오증으로 직행하니 주의하시고, 항상 '어려운 공부하느라 수고 많다'고 어깨를 쓰다듬어 주세요.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "좋아하는 음료수와 함께 쾌적하게 탁 트인 스터디 카페 창가 자리에 착석 후 가벼운 시각 학습 시작" },
+                    { time: "18:00 - 19:30", action: "칼라 펜과 스티커를 활용하여 내일 제출할 미술/체육 등의 수행평가 예술적으로 완료하기" },
+                    { time: "20:30 - 21:30", action: "지루한 영어 지문이나 한자 단어들을 사진 찍듯 한 장씩 마음 편하게 쳐다보며 연상 암기" },
+                    { time: "21:30 - 22:30", action: "힐링이 되는 음악을 가볍게 들으며 오늘의 플래너에 체크 표시하고 취침하기" }
+                ]
+            },
+            INFP: {
+                title: "이상적인 중재자형",
+                slogan: "내가 이 공부를 해야 하는 진정한 가치를 찾아 헤맨다.",
+                tags: ["#공상가", "#감수성폭발", "#자유로운영혼"],
+                theme: "teal",
+                strengthsSummary: "풍부한 문학적 감수성과 창의적 작문 실력",
+                strengthsDetails: [
+                    "국어 문학 작품 감상, 영어 원서 독해, 도덕의 윤리 개념 분석 등 스토리와 깊은 가치가 숨겨진 과목에서 강한 이해도를 보여줍니다.",
+                    "창의성이 가미된 서술형 작문 영역에서 교사들을 깜짝 놀라게 하는 우수한 글쓰기 능력을 지니고 있습니다."
+                ],
+                weaknessSummary: "극도로 약한 수리/이공계적 흥미 및 체계성",
+                weaknessDetails: [
+                    "지극히 정량적이고 건조한 공식의 단순 반복 계산(수학 연산, 물리 화학 계산)에서 쉽게 뇌가 피곤해집니다.",
+                    "자주 공상의 나래를 펼쳐 앉아 있는 시간에 비해 진도가 전혀 나가지 못합니다."
+                ],
+                strategies: [
+                    { title: "스토리텔링 식 수학 공부법", text: "수학 공식을 볼 때 이 공식이 고대 그리스에서 어떤 상황에서 유래되었는지 스토리를 덧입혀 인문학적으로 공부를 시작하세요." },
+                    { title: "포모도로 집중법 도입", text: "잡생각이 너무 많은 편이므로 타이머로 '25분 칼집중 후 5분 공상하기' 식의 인위적 순환 장치를 켜서 잡념을 제어해야 합니다." },
+                    { title: "일대일 과외 혹은 밀착 코칭", text: "대형 학원의 경쟁적 구도에서는 압박감을 이기지 못합니다. 본인의 감정선을 지지해 주는 온화한 성향의 일대일 선생님과 궁합이 최고입니다." }
+                ],
+                slump: "성적이 떨어지거나 자존감이 무너질 때 '난 패배자야'라는 깊은 자아 비판의 지하실로 내려앉습니다. 이때 학업 잔소리를 하면 역효과가 큽니다. 아이가 가진 감성적이고 따뜻한 재능을 먼저 아낌없이 칭찬해 주세요.",
+                parentTip: "가장 섬세하고 다정하지만, 한편으론 쉽게 상처를 받는 유리 멘탈이 될 수 있습니다. 기교 어린 보상보다 '엄마아빠는 너가 점수를 몇 점 받든 너의 따뜻한 영혼 자체를 너무 사랑해'라는 든든한 정서적 백업이 공부할 안전망이 됩니다.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "25분 타이머 작동: 국어 문학 지문 가독성 있게 해석하고 나만의 감수성을 담아 필기" },
+                    { time: "17:30 - 19:00", action: "이야기나 일러스트가 다량 포함된 영어 동화책 독해 혹은 역사 인물 웹툰 보며 배경 지식 확장" },
+                    { time: "20:00 - 21:30", action: "수학을 풀 때, 친구에게 이 복잡한 문제를 가르쳐주는 친절한 가상 튜터 시뮬레이션을 하며 입으로 설명해 보기" },
+                    { time: "21:30 - 22:30", action: "생각이나 꿈에 대한 아이디어를 일기장이나 그림 메모에 자유롭게 쏟아놓아 스트레스 해소 후 취침" }
+                ]
+            },
+            INTP: {
+                title: "논리적인 사색가형",
+                slogan: "알 때까지 파고든다. 맹목적인 암기는 거부한다.",
+                tags: ["#호기심천국", "#인강러", "#독학의대가"],
+                theme: "sky",
+                strengthsSummary: "고도의 지적 호기심과 탁월한 수학/과학적 추론 능력",
+                strengthsDetails: [
+                    "지식의 구멍이 생기는 것을 참지 못해, 왜 그런지 원리가 이성적으로 납득이 될 때까지 고도의 지적 집중력을 발휘합니다.",
+                    "수학의 고난도 함수, 과학의 우주 천체나 물리적 역학 등 복잡한 논리 구조를 추적하는 학업 능력이 월등합니다."
+                ],
+                weaknessSummary: "생활 관리와 수행평가 챙기기 귀찮아함",
+                weaknessDetails: [
+                    "내신 점수의 절반을 차지하는 단순 서류 제출, 잔잔한 수행평가 마감을 자주 잊어 기한을 놓치기 십상입니다.",
+                    "선생님이 왜 저렇게 단순한 내용을 반복해서 알려주는지 조소하며 학교 수업에 집중을 안 할 수 있습니다."
+                ],
+                strategies: [
+                    { title: "체계적인 알림 연동 시스템 구축", text: "휴대폰 캘린더나 노션 앱을 통해 수행평가 제출 기한과 과제를 기록하고 스마트 알람이 하루 전에 울리도록 강제 시스템을 만드세요." },
+                    { title: "선생님 놀이 메타인지", text: "본인이 완전히 완벽하게 설명할 수 있을 때까지 화이트보드에 공식을 유도해 나가며 아는 것과 모르는 것을 가려내 학습 효율을 극대화하세요." },
+                    { title: "비이성적 수긍의 훈련", text: "학교 시험은 학문 탐구가 아니므로 '때로는 지엽적인 정답 기준도 시험에 출제되면 수긍하고 외워두는 것'이 득점에 이롭다고 전략적 판단을 내리세요." }
+                ],
+                slump: "호기심을 잃고 단순 암기의 한계에 봉착했을 때 번아웃이 발생합니다. 이럴 때는 과학관이나 대학교 캠퍼스 견학, 혹은 수준 높은 대학 전공 서적 맛보기 독서를 통해 잠들어 있는 지적 심장 박동을 깨워야 합니다.",
+                parentTip: "가장 독립적이고 자기만의 방에 틀어박혀 고고하게 지내는 성격입니다. 감정적으로 안아주려 하기보다, 지적으로 어른 대접을 해주며 논리적인 토론 상대로 인정해 줄 때 엄청난 내면의 존경심을 느낍니다.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "학문적 흥미가 제일 가득한 과학 심화 인강 시청 및 복잡한 현상의 원리 규명" },
+                    { time: "18:00 - 19:30", action: "화이트보드 앞에 서서 수학의 난해한 미션 문제들을 말로 풀어가며 '스스로 가르치기' 공부법 가동" },
+                    { time: "20:30 - 21:30", action: "스마트폰 알람에 기록해 놓은 내일 마감 학교 과제 및 사소한 제출물들을 기계적으로 신속 해결" },
+                    { time: "21:30 - 22:30", action: "인터넷 포럼의 흥미로운 지식 채널을 서핑하거나 과학 서적을 보며 자율 탐색 후 편안히 숙면" }
+                ]
+            },
+            ESTJ: {
+                title: "현실적인 관리자형",
+                slogan: "성적은 곧 나의 성실성 지표! 치밀하게 지휘하여 만점을 공략한다.",
+                tags: ["#강철의지가진자", "#모범플래너", "#성적우등생"],
+                theme: "blue",
+                strengthsSummary: "시간 엄수와 완벽한 목표 달성을 해내는 최고 수준의 통제력",
+                strengthsDetails: [
+                    "스케줄러와 계획을 완벽하게 무리 없이 소화해 내는 타고난 실행 기계입니다.",
+                    "수행평가 일정을 칼같이 지키고 단체 조별 과제에서도 뛰어난 조장 리더십을 발휘해 무임승차를 용납하지 않습니다."
+                ],
+                weaknessSummary: "자신만의 엄격한 기준과 유연성 부재로 인한 스트레스",
+                weaknessDetails: [
+                    "계획이 사소한 이벤트로 인해 조금이라도 틀어지면 엄청난 짜증과 화를 스스로에게 표출합니다.",
+                    "창의적이거나 답안이 열려 있는 인문학적 수행평가에 대해 불필요하다고 비하하거나 답답해합니다."
+                ],
+                strategies: [
+                    { title: "시간 단위 정밀 스케줄링", text: "시간표에 빈틈없이 공부 과목과 예상 완료 페이지를 채운 후 성취 체크(V)를 하며 도파민을 유도하세요." },
+                    { title: "객관식 기출 대량 무한 반복", text: "가장 정량적이고 패턴이 일관된 양질의 문제집들을 대량으로 구매하여 기출 패턴을 뇌에 완벽히 주입하는 것이 성적 내기 쉽습니다." },
+                    { title: "수학 고난도 풀이의 다각화", text: "답을 한 가지 방식으로 도출하는 것에 안주하지 말고, '다른 최단 경로의 신속한 풀이 방식'을 친구나 오답 인강을 보며 꼼꼼히 흡수해 지평을 넓히세요." }
+                ],
+                slump: "시험 점수가 기대에 못 미쳤을 때 스스로의 실행력을 통제하지 못했다는 굴욕감에 휩싸여 갑자기 독설을 퍼붓거나 몸을 혹사하기 쉽습니다. 이때는 부모님이 '너의 노력은 최고였어. 시험 자체의 난이도 조절 미스일 뿐이야'라고 계량화된 지표를 던져 위로해 주셔야 합니다.",
+                parentTip: "감정이나 힐링 타령을 약한 소리로 치부하기 쉽습니다. 일주일에 하루는 '체력 관리 차원의 강제 정기 스포츠' 시간표를 고정해 두는 방식으로 신체 에너지를 건강하게 조절해 주셔야 장기 레이스에서 살아남습니다.",
+                schedule: [
+                    { time: "08:00 - 08:30", action: "오늘 완수할 교과 성취 목록을 일간 계획표에 빼곡히 작성하고 분량 조절" },
+                    { time: "16:30 - 18:30", action: "가장 에너지가 넘칠 때 약점 과목인 수학 기출 30문제를 타이트한 제한 시간을 켜고 기계처럼 해결" },
+                    { time: "19:30 - 21:00", action: "국어 암기 사항 및 역사적 사실을 빈칸 채우기 방식으로 자가 테스트 꼼꼼히 완료" },
+                    { time: "21:00 - 22:30", action: "스케줄 성공 여부 최종 검증 및 다음날 시간표 조정 완료 후 취침" }
+                ]
+            },
+            ESFJ: {
+                title: "친절하고 사교적인 협력자형",
+                slogan: "우리 반 친구들과 선생님과 좋은 관계를 맺어야 공부도 즐겁다.",
+                tags: ["#조별과제에이스", "#멘토링최적", "#리액션부자"],
+                theme: "emerald",
+                strengthsSummary: "뛰어난 학급 리더십과 멘토/멘티 동반 상승 공부",
+                strengthsDetails: [
+                    "질문을 하거나 친구에게 모르는 것을 알기 쉽게 가르쳐줄 때 본인의 성적이 수직 상승하는 마법 같은 메타인지 학습자입니다.",
+                    "학급 분위기와 선생님과의 정서적 끈끈함이 최고일 때, 선생님께 잘 보이고 싶어서라도 해당 과목을 기적적으로 만점 받기도 합니다."
+                ],
+                weaknessSummary: "친구들의 미묘한 관계 갈등이나 뒷담화에 정신이 팔림",
+                weaknessDetails: [
+                    "단짝 친구와의 일시적 다툼이나 단체 카톡방의 갈등이 터지면 독서실에서 머릿속에 온통 그 생각만 들어 공부를 아예 방치합니다.",
+                    "남들에게 늘 친절하고 싶어서 정작 본인의 개인 공부 시간을 손해 보거나 뺏기는 경우가 태반입니다."
+                ],
+                strategies: [
+                    { title: "함께 성장하는 스터디 그룹", text: "의지가 맞고 모범적인 친구 1~2명과 함께 서로 배운 내용을 하교 후에 번갈아 설명해 주는 멘토링 클럽을 만드세요." },
+                    { title: "질문 킹 도전하기", text: "학교 쉬는 시간이나 점심시간을 활용해 담당 교과 선생님실에 싹싹하게 찾아가 질문을 자주 하여 친분을 돈독히 쌓아 공부에 불을 지피세요." },
+                    { title: "개인 공부 방어막 치기", text: "저녁 8시부터 10시까지는 '공부 중 집중' 휴대폰 스크린 타임 잠금 기능을 활성화하여 무분별한 메신저 수다 차단막을 두세요." }
+                ],
+                slump: "자신을 싫어하는 선생님이 생기거나, 조별 과제에서 트러블이 나면 심장에 칼을 맞은 듯 깊은 슬럼프에 진입합니다. 이때는 친구 고민을 전적으로 들어주고 정서적 맛있는 식사와 외식으로 텐션을 환기해야 합니다.",
+                parentTip: "리액션과 수다가 가장 활발한 자녀입니다. 방문을 닫아두고 공부하는 걸 외로워하니, 거실 식탁 등 부모님이 오가는 트인 환경에서 '엄마 옆에서 공부할래' 할 때 기꺼이 곁을 비워주시고 격려해 주세요.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "학교 자율동아리나 조원들과 스터디룸에 모여 수행평가 가이드 역할 분담 및 기분 좋게 리드" },
+                    { time: "17:30 - 19:00", action: "교무실에서 선생님께 물어본 질문지 복습 및 해당 과목 최우선 자율 학습" },
+                    { time: "20:00 - 21:30", action: "절친과 오늘 배운 까다로운 화학 반응식 암기 비법에 대해 줌(Zoom)이나 영상통화로 10분간 서로 가볍게 퀴즈 주고받기" },
+                    { time: "21:30 - 22:30", action: "친구들과의 메신저 답장을 쿨하게 마무리 짓고 내일 가져갈 보답용 사탕을 가방에 넣고 기분 좋게 숙면" }
+                ]
+            },
+            ENFJ: {
+                title: "따뜻한 지도자형",
+                slogan: "우리 모두 함께 성장하여 좋은 세상을 만드는 배움이 되기를!",
+                tags: ["#학생회장", "#선한영향력", "#동기부여가"],
+                theme: "rose",
+                strengthsSummary: "명확한 미래 지향적 비전과 뛰어난 인문학적 통찰력",
+                strengthsDetails: [
+                    "본인이 이다음에 어떠한 선한 직업이나 기여를 할 것인지 가치관이 연결되면 지치지 않는 학습 열정 탱크를 소유하게 됩니다.",
+                    "감성적인 글쓰기, 인문 논술, 토론형 수업 및 외국어 표현 능력에서 유난히 천재성을 보여줍니다."
+                ],
+                weaknessSummary: "남들의 문제나 고충을 책임지려다 본인의 번아웃 초래",
+                weaknessDetails: [
+                    "학급 반장, 전교 임원을 도맡으며 늘 사람들을 케어하느라 정작 자습 시간 확보에 치명적인 구멍이 생깁니다.",
+                    "지나치게 남들의 비판적인 눈빛이나 차가운 지적 한마디를 내면 깊숙이 간직해 전의를 상실하기도 합니다."
+                ],
+                strategies: [
+                    { title: "장기 비전 보드 시각화", text: "자신의 책상 앞에 본인이 돕고 싶은 세상의 가치, 가고 싶은 목표 고등학교/대학교 사진을 크게 붙여 강력한 드라이브를 거세요." },
+                    { title: "스터디위드미 라이브 활용", text: "화면을 켜고 전 세계 학생들이 각자 조용히 열공하는 스터디 스트리밍 등에 동참하여 '함께 나아가는 연대감'을 간접 충족하며 열공하세요." },
+                    { title: "감정 정리 오답 리포팅", text: "문제를 틀렸을 때 속상해만 하지 말고, '출제자의 선한 출제 의도는 무엇일까?' 하고 이성적으로 질문하는 친근한 대화형 필기를 해보세요." }
+                ],
+                slump: "학급의 화합이 깨지거나 본인의 리더십이 부정당했을 때 학업에도 큰 손실이 생깁니다. 이때는 아이의 손을 잡고 미술관 관람, 콘서트 관람 등을 하며 '너는 이미 세상에 귀중한 등대란다'라고 영적 지지를 주어 극복시켜야 합니다.",
+                parentTip: "가장 말도 잘하고 어른스러운 자녀이지만, 내면은 아직 아주 어린 중학생 여린 감성입니다. 부모님이 무리해서 다그치기보다 '넌 너무 착하고 빛나는 우주야'라는 따스한 신뢰가 최상의 학업 성적표로 돌아옵니다.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "학급 내 부적응 친구나 소외된 조원들 다독이며 조별 연구 보고서의 세련된 마무리 완성" },
+                    { time: "18:00 - 19:30", action: "외국어 학습(영어 지문 문장 암송)을 스피커로 들으며 리드미컬하게 소리 내서 5번 이상 감정을 넣어 읽기" },
+                    { time: "20:30 - 22:00", action: "선한 비전 자극을 위해 꿈꾸는 대학교의 입학 전형 인강 등을 시청하며 수학 고난도 공식 응용 적용" },
+                    { time: "22:00 - 22:30", action: "성찰 일기를 작문하며 아름다운 이상을 꿈꾸고 만족스럽게 취침" }
+                ]
+            },
+            ENFP: {
+                title: "재기발랄한 활동가형",
+                slogan: "공부도 축제이자 신나는 모험이어야 한다! 번뜩이는 영감의 아이콘.",
+                tags: ["#아이디어뱅크", "#멀티태스킹", "#학습축제"],
+                theme: "amber",
+                strengthsSummary: "엄청난 순간 창의성과 단기 언어 수용 속도",
+                strengthsDetails: [
+                    "국어, 외국어, 예체능 등 영감과 번뜩임이 필요한 영역에서 단시간 만점을 받는 순발력을 발휘합니다.",
+                    "틀에 박히지 않은 창의적인 학교 탐구 대회나 PPT 기획, 발표 수업에서 전교 1등을 손쉽게 달성합니다."
+                ],
+                weaknessSummary: "극도로 처참한 엉덩이 집중력 및 잔실수 백만 개",
+                weaknessDetails: [
+                    "시험지에 마킹 실수를 하거나, 더하기 빼기 등 어처구니없는 초보적인 연산 실수로 매번 아깝게 점수를 깎여 옵니다.",
+                    "주의력이 산만하여 한 과목을 30분 이상 꾸준히 집중해서 끝내는 것이 고통의 연속입니다."
+                ],
+                strategies: [
+                    { title: "메뚜기식 순환 공부법 도입", text: "한 과목을 3시간 붙잡고 있지 마세요. 과감하게 국어 40분 -> 수학 40분 -> 영어 40분 식으로 과목을 스위칭해가며 뇌의 지루함을 인위적으로 제거하세요." },
+                    { title: "게이미피케이션 암기", text: "단조로운 역사 연도를 암기할 때 랩으로 만들어 불러보거나, 몸동작을 가미해 연기하듯 외우면 엄청난 단기 암기가 성취됩니다." },
+                    { title: "철저한 이중 마킹 검토 훈련", text: "시험 종료 10분 전 알림이 울리면 무조건 펜을 놓고 OMR 카드와 시험지의 번호를 하나씩 손가락으로 짚어 읽는 오버 검토 습관을 기르세요." }
+                ],
+                slump: "정적인 규율이 너무 가득하고 반복적인 단순 계산 문제만 무더기로 숙제로 나올 때 심연의 슬럼프를 겪으며 아예 PC방이나 밖으로 튀어버립니다. 이때는 과감히 공부방 구조를 새롭게 기분 전환으로 바꾼 뒤 다채롭고 화려한 공부 공간으로 데려가 텐션을 올리세요.",
+                parentTip: "충동적이고 기분파인 경향이 큽니다. '너 또 놀아?'라는 부정적 감시형 멘트는 전쟁의 도화선이 됩니다. '우리 영재, 오늘 벌써 수학 다 풀었으면 코인 노래방 한판 쏘기!' 같은 긍정 에너지 배팅이 최고로 영리한 처방입니다.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "영어 단어를 암기 카드 게임처럼 만들어서 스톱워치 속도 경합을 펼치며 다이내믹하게 암기" },
+                    { time: "17:30 - 19:00", action: "뇌의 빠른 주기를 만족하기 위해 수학 15문제 -> 사회 1단원 요약 -> 다시 수학 15문제 징검다리 스위칭 공부" },
+                    { time: "20:00 - 21:30", action: "가장 흥미로운 역사 과목 지식을 바탕으로 가상의 라디오 팟캐스트 방송을 하듯 마이크를 쥐고 설명 연습" },
+                    { time: "21:30 - 22:30", action: "가족들이나 반려인형 앞에 앉혀두고 오늘 배운 화려한 지식 썰 풀기 진행 후 꿀잠" }
+                ]
+            },
+            ESTP: {
+                title: "활동적이고 직관적인 해결사형",
+                slogan: "긴박한 승부와 직관적인 눈치로 시험을 가볍게 클리어한다.",
+                tags: ["#승부사", "#실전최강", "#공부는게임이다"],
+                theme: "orange",
+                strengthsSummary: "놀라울 정도로 뛰어난 순발력과 압박감이 높은 실전 시험에서의 깡다구",
+                strengthsDetails: [
+                    "평소에는 대충 노는 것처럼 보여도 실제 중요 시험장에서 긴장하지 않고 120%의 실력을 뿜어내는 실전형 전사입니다.",
+                    "실생활과 연동된 물리, 실용 수학, 공학 기술 및 체육 등 감각적인 영역에서 남다른 두각을 나타냅니다."
+                ],
+                weaknessSummary: "극도로 얕은 이론적 깊이와 끈기가 필요한 과목 기피",
+                weaknessDetails: [
+                    "두꺼운 개념서를 정독하거나 철학적 맥락이 가미된 긴 비문학 지문을 차분히 읽어나갈 때 좀이 쑤셔 미쳐 버립니다.",
+                    "수학 서술형 평가에서 과정을 예쁘게 서술하라는 규칙을 무시하고 답만 툭 적어 감점을 무수히 당합니다."
+                ],
+                strategies: [
+                    { title: "타이머 경쟁 배틀 시스템", text: "모범생 친구나 라이벌 친구에게 기출문제 빨리 풀기 내기를 걸어 극한의 생존 승부욕을 촉발할 때 우주의 집중력이 뿜어져 나옵니다." },
+                    { title: "수학 서술형 구조적 정복", text: "서술형 문제 풀이 시, 화이트보드에 '채점 포인트가 되는 핵심 공식 기입하기' 체크리스트를 두고 가시적으로 채워 쓰는 버릇을 기르세요." },
+                    { title: "단기 포상형 미션 쪼개기", text: "장기 내신 대비는 버거우므로 하루의 공부를 '30분 수학 격파 후 컵라면 간식 획득' 같은 자극적이고 확실한 도파민 보상형 조각들로 쪼개세요." }
+                ],
+                slump: "책상에 억지로 오래 묶여 있어 몸의 에너지가 완전히 방전되었을 때 심각한 가출성 무기력을 호소합니다. 이때는 이틀 동안 학원 자습을 싹 빼주고 전력 질주 축구나 야외 바이크 라이딩 등으로 신체 땀 배출을 시켜 가슴의 갑갑함을 뚫어주어야 합니다.",
+                parentTip: "스킨십이 유쾌하고 칭찬에 몸이 먼저 움찔거리는 단순하고 멋진 아이입니다. 동기 유발을 위해 성적이 올랐을 때의 직관적 보상(원하던 최신 운동화, 전자기기 구매 찬스 등)을 협상 테이블에 명확히 걸 때 엄청난 호랑이 기운을 내뿜습니다.",
+                schedule: [
+                    { time: "16:30 - 17:30", action: "신체 에너지 해소를 위해 푸시업 가볍게 하고 공부방에 들어가 초고속 수학 계산 30문항 타임어택 돌파" },
+                    { time: "17:30 - 19:00", action: "과학/기술 등의 실생활 작동 원리 영상들을 스마트하게 시청하고 직관적 핵심만 교재에 가볍게 밑줄" },
+                    { time: "20:00 - 21:30", action: "모범생 친구의 완벽 필기본을 구해서 요점 위주로 영리하게 훑고 기출 예상 정답 눈치게임 분석" },
+                    { time: "21:30 - 22:30", action: "친구들과 실외 풋살이나 피지컬 스포츠로 에너지를 뿜어낸 뒤 완전한 피로 상태로 즉각 꿀잠" }
+                ]
+            },
+            ESFP: {
+                title: "자유로운 영혼의 연예인형",
+                slogan: "분위기가 전부다! 모두의 관심과 즐거운 에너지가 나를 열공하게 만든다.",
+                tags: ["#핵인싸", "#공스타꿈나무", "#칭찬원동력"],
+                theme: "rose",
+                strengthsSummary: "사교성과 남다른 시각/청각적 자극 수용력",
+                strengthsDetails: [
+                    "학급에서 온갖 연극, 댄스 부서, 축제 기획을 주도할 만큼 무대 기획력이 풍부하여 학교 활동 만점을 받기 매우 쉽습니다.",
+                    "재미있는 인강 강사의 유머러스한 말투나 오디오 지식을 스펀지처럼 흡수하여 수월하게 암기합니다."
+                ],
+                weaknessSummary: "혼자 고립되어 보내야 하는 공부 시간의 절대적 거부",
+                weaknessDetails: [
+                    "어두컴컴한 독서실 독방에 격리당하면 마치 처벌을 받는 것처럼 우울해져 10분도 버티지 못하고 탈출합니다.",
+                    "친구들의 놀자는 카톡 번개 유혹에 저항하는 방어력이 0에 수렴합니다."
+                ],
+                strategies: [
+                    { title: "공부 메이트 인스타(공스타) 활용", text: "본인의 공부 타이머 흔적, 예쁘게 필기한 교과서 사진을 예쁘게 인스타그램에 올려 소소한 하트 응원 댓글을 유도하며 공부 에너지를 가득 충전해 보세요." },
+                    { title: "소리 내며 온몸으로 말하는 학습", text: "방안에서 그냥 읽지 마세요. 본인이 유명 일타강사 마냥 제스처를 취하고 유머러스하게 개그를 섞어 거울 보고 강의하면 10배 빨리 외워집니다." },
+                    { title: "개방형 스터디 카페 공부", text: "주변 사람들이 열심히 연필 소리를 내며 활기차게 열공하는 것이 실시간으로 목격되는 대형 창가 스터디 카페에서 시각적 자극을 받아 열공하세요." }
+                ],
+                slump: "주변의 따돌림을 느끼거나, 내신 시험기간에 홀로 배제되었다고 느낄 때 지독하게 좌절합니다. 이때는 공부 이야기를 꺼내지 말고 옷 쇼핑이나 핫플레이스 카페 투어를 함께 다니며 사람 가득한 활력을 아이에게 가득 주어야 합니다.",
+                parentTip: "가장 감수성이 예민하고 패션, 뷰티, 대중문화 트렌드에 눈이 밝습니다. 쓸데없는 데 신경 쓴다고 혼내지 마시고, 아이가 단장하는 예쁜 학용품과 공부 착장을 다정하게 격려해 줄 때 학습 효율이 극대화됩니다.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "친구들이 가득 보이고 화사한 스터디 카페의 트인 메인홀 중심부에 자리를 잡고 공부 동화 속 인물처럼 학습 자세 세팅" },
+                    { time: "18:00 - 19:30", action: "화려한 오색 마커를 활용하여 영어 핵심 동사들을 인포그래픽 그림처럼 변환해 필기장에 기록" },
+                    { time: "20:30 - 21:30", action: "온몸으로 제스처를 가미하며 역사 과목의 사건을 한 편의 연극처럼 가상 무대에서 소리 질러 스피칭 강의 연출" },
+                    { time: "21:30 - 22:30", action: "오늘의 예쁜 공부 흔적을 가볍게 촬영해 저장하고 자부심 가득 안고 취침" }
+                ]
+            },
+            ESTJ: {
+                title: "체계적인 리더형",
+                slogan: "정해진 승리 공식을 향해 한 치의 오차도 없이 직진한다.",
+                tags: ["#플래너마스터", "#시간관리", "#정석암기"],
+                theme: "blue",
+                strengthsSummary: "정해진 계획과 정석을 따르는 확실한 집행력과 조별과제 리더십",
+                strengthsDetails: [
+                    "매일 배운 교과 내용을 꼼꼼하게 누락 없이 리스트업하고 완성할 때 쾌감을 느끼는 성향입니다.",
+                    "기출 변형 문제를 세밀하게 나누어 오답 노트를 만들고 분석하는 능력이 뛰어납니다."
+                ],
+                weaknessSummary: "새로운 유형과 융합형 문제에서 고정관념에 갇힘",
+                weaknessDetails: [
+                    "정해진 출제 한계를 벗어난 창의성 중심 문제나 고난도 수리 퍼즐을 접하면 극도의 당황감을 느끼며 화를 냅니다.",
+                    "계획이 조금이라도 틀어지면 하루 계획 전체를 날려버리는 경향이 있습니다."
+                ],
+                strategies: [
+                    { title: "시간 단위 계획 및 여유 블록 배치", text: "하루 일과표에 1시간의 '돌발 대처 버퍼 블록'을 할당해 계획 어긋남에 대처하는 유연한 플랜을 세우세요." },
+                    { title: "오답 패턴 마크업 분석", text: "틀린 문제를 단순 복사가 아닌, 틀린 이유(연산 실수, 개념 오해, 응용 미흡)별로 색깔 라벨을 다르게 붙여 시각적으로 분석하세요." },
+                    { title: "선배들의 고등 연계 로드맵 선독서", text: "중등 내신 선행이 단지 내신용이 아닌 고등 수능과 어떻게 연결되는지 연계 교재를 한눈에 파악해 원동력을 더 크게 얻으세요." }
+                ],
+                slump: "스스로가 성적이 통제 불능이라고 느낄 때 갑작스러운 독단적 번아웃이 발생합니다. 이성적이고 세밀한 지표 검토를 통해 실망감을 상쇄하고 하루는 완벽히 쉴 수 있는 권리를 주어 충전하세요.",
+                parentTip: "명확하게 규칙이 지켜지고 단정한 정돈 상태가 유지되는 방 분위기에서 최상의 뇌 효율을 보입니다. 어지러진 거실이나 불규칙한 식사 시간은 이 유형에게 스트레스가 될 수 있습니다.",
+                schedule: [
+                    { time: "08:00 - 08:30", action: "오늘 완성할 학습 과목과 분량을 완벽하게 일일 계획표에 셋업" },
+                    { time: "16:30 - 18:00", action: "가장 까다롭고 논리적 성질이 짙은 수학/과학 심화 문제집 문항 타깃 공략" },
+                    { time: "19:00 - 20:30", action: "국어 비문학 지문 문장 분석 및 사회 과목 기출 오답 문항 유형별 분류 마크" },
+                    { time: "21:00 - 22:00", action: "플래너 완성도 정교하게 자가 평가 및 내일 시간표 세부 오차 정밀 조정 후 숙면" }
+                ]
+            },
+            ENTP: {
+                title: "뜨거운 토론을 즐기는 변론가형",
+                slogan: "질문하고 뒤엎으며 배운다. 전통적인 주입식 공부는 거부한다.",
+                tags: ["#천재설", "#지적자극", "#역발상"],
+                theme: "indigo",
+                strengthsSummary: "틀에 박히지 않은 거시적 관점과 뛰어난 수학적 발상 능력",
+                strengthsDetails: [
+                    "남들이 생각하지 못하는 독창적인 아이디어와 수학적 변형 공식을 번뜩이며 유도해 내는 능력이 월등합니다.",
+                    "지적으로 나보다 더 강한 라이벌이나 엄격한 선생님의 논리적 도발을 만날 때 승부욕이 고조되어 성적이 급상승합니다."
+                ],
+                weaknessSummary: "단순 복습과 암기의 처참한 미루기 버릇",
+                weaknessDetails: [
+                    "다 아는 내용이라고 자만하여 복습이나 마무리 훈련을 전혀 안 하다가 실전 시험에서 꼼꼼함 부족으로 대량 감점을 당합니다.",
+                    "노트 필기나 수행평가 양식을 예쁘게 갖추어 제출하는 것을 극도로 귀찮아합니다."
+                ],
+                strategies: [
+                    { title: "이이제이 라이벌 공부법", text: "나보다 공부를 잘하는 라이벌이나 반대 성향의 친구를 선정해 은밀하게 '가상 배틀' 미션을 펼쳐 열정을 자극하세요." },
+                    { title: "화이트보드 난제 격파", text: "어려운 수학 난제를 매일 하나씩 칠판에 적어두고 하교 후 방에 와서 탐정처럼 추적해 나가는 게임 스타일 학습법을 추천합니다." },
+                    { title: "역발상 오답 찾기 게임", text: "단순히 문제를 푸는 것에 질리기 쉬우므로, '왜 출제자는 오답 선지 4개를 이렇게 매력적으로 설계했을까?' 출제자의 머리꼭대기에 올라타 오답의 함정을 추리하는 공부를 해보세요." }
+                ],
+                slump: "수업 내용이 지나치게 단조롭거나 기계식 암기만 강요당하면 지루함의 바다에 빠져 공부 태만 슬럼프가 시작됩니다. 이럴 때는 깊이 있는 학문 다큐멘터리나 대학 수준의 기초 교양 서적을 가볍게 맛보게 하여 호기심 엔진을 켜주어야 합니다.",
+                parentTip: "말대꾸가 가장 현란하고 부모의 논리적 헛점을 귀신같이 지적하는 자녀입니다. 감정적으로 화를 내지 마시고 '와, 너 방금 논리는 아주 예리했어! 그럼 네 논리를 이번 수학 킬러 문항 푸는 데도 똑같이 입증해 볼래?' 하는 식의 지적 유도를 펼치세요.",
+                schedule: [
+                    { time: "16:30 - 18:00", action: "수학 심화 킬러 문제들을 탐정 소설을 풀듯이 다각도의 번뜩이는 풀이식 유도하여 해결" },
+                    { time: "18:00 - 19:30", action: "선생님의 수업 내용 중 논리적 빈틈이나 흥미로웠던 테마를 구글 서칭하며 입체적 확장 학습" },
+                    { time: "20:30 - 21:30", action: "하기 싫은 단순 영어 단어 암기는 스마트 타이머를 켜두고 본인의 이전 기록을 경신하는 타임어택 미션으로 해결" },
+                    { time: "21:30 - 22:30", action: "방의 화이트보드에 오늘 정복한 까다로운 수학 공식이나 원리를 멋진 설계도처럼 그려두고 뿌듯하게 취침" }
+                ]
+            }
+        };
+
+        let currentSelected = 'ESTJ';
+
+        // Initialize App
+        window.onload = function() {
+            renderMbtiGrid();
+            selectMbti('ESTJ');
+            lucide.createIcons();
+        }
+
+        // Render 16 MBTI Buttons with group colors
+        function renderMbtiGrid() {
+            const grid = document.getElementById('mbti-grid');
+            grid.innerHTML = '';
+            
+            Object.keys(mbtiData).forEach(mbti => {
+                const data = mbtiData[mbti];
+                let btnColor = 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+                
+                const btn = document.createElement('button');
+                btn.id = `btn-${mbti}`;
+                btn.className = `p-3 rounded-2xl text-sm font-extrabold border transition-all duration-200 flex flex-col items-center justify-center gap-1 shadow-sm ${btnColor}`;
+                btn.onclick = () => selectMbti(mbti);
+                
+                const mbtiText = document.createElement('span');
+                mbtiText.className = 'text-base font-black tracking-wider';
+                mbtiText.innerText = mbti;
+
+                const typeIndicator = document.createElement('span');
+                typeIndicator.className = 'text-[10px] font-medium text-slate-400';
+                // Simply label E or I group
+                typeIndicator.innerText = mbti.startsWith('I') ? '내향형' : '외향형';
+
+                btn.appendChild(mbtiText);
+                btn.appendChild(typeIndicator);
+                grid.appendChild(btn);
+            });
+        }
+
+        // Update Dashboard details on click
+        function selectMbti(mbti) {
+            currentSelected = mbti;
+            const data = mbtiData[mbti];
+
+            // Reset all button styles
+            Object.keys(mbtiData).forEach(key => {
+                const btn = document.getElementById(`btn-${key}`);
+                if (btn) {
+                    btn.className = `p-3 rounded-2xl text-sm font-extrabold border transition-all duration-200 flex flex-col items-center justify-center gap-1 shadow-sm bg-white text-slate-700 border-slate-200 hover:bg-slate-50`;
+                }
+            });
+
+            // Set active button style based on MBTI group color
+            const activeBtn = document.getElementById(`btn-${mbti}`);
+            let themeClass = 'border-indigo-600 bg-indigo-50/70 text-indigo-700 ring-2 ring-indigo-100';
+            let barColor = 'bg-indigo-600';
+            if (data.theme === 'emerald') {
+                themeClass = 'border-emerald-600 bg-emerald-50/70 text-emerald-700 ring-2 ring-emerald-100';
+                barColor = 'bg-emerald-600';
+            } else if (data.theme === 'teal') {
+                themeClass = 'border-teal-600 bg-teal-50/70 text-teal-700 ring-2 ring-teal-100';
+                barColor = 'bg-teal-600';
+            } else if (data.theme === 'purple') {
+                themeClass = 'border-purple-600 bg-purple-50/70 text-purple-700 ring-2 ring-purple-100';
+                barColor = 'bg-purple-600';
+            } else if (data.theme === 'rose') {
+                themeClass = 'border-rose-600 bg-rose-50/70 text-rose-700 ring-2 ring-rose-100';
+                barColor = 'bg-rose-600';
+            } else if (data.theme === 'sky') {
+                themeClass = 'border-sky-600 bg-sky-50/70 text-sky-700 ring-2 ring-sky-100';
+                barColor = 'bg-sky-600';
+            } else if (data.theme === 'amber') {
+                themeClass = 'border-amber-600 bg-amber-50/70 text-amber-700 ring-2 ring-amber-100';
+                barColor = 'bg-amber-600';
+            } else if (data.theme === 'orange') {
+                themeClass = 'border-orange-600 bg-orange-50/70 text-orange-700 ring-2 ring-orange-100';
+                barColor = 'bg-orange-600';
+            }
+            if (activeBtn) {
+                activeBtn.className = `p-3 rounded-2xl text-sm font-extrabold border transition-all duration-200 flex flex-col items-center justify-center gap-1 shadow-sm ${themeClass}`;
+            }
+
+            // Top Bar Color Update
+            const topBar = document.getElementById('card-top-bar');
+            topBar.className = `absolute top-0 left-0 right-0 h-2 ${barColor}`;
+
+            // Text Injections
+            document.getElementById('selected-mbti').innerText = mbti;
+            document.getElementById('selected-mbti').className = `text-4xl font-extrabold tracking-wider ${data.theme === 'emerald' ? 'text-emerald-600' : data.theme === 'teal' ? 'text-teal-600' : data.theme === 'purple' ? 'text-purple-600' : data.theme === 'rose' ? 'text-rose-600' : data.theme === 'sky' ? 'text-sky-600' : data.theme === 'amber' ? 'text-amber-600' : data.theme === 'orange' ? 'text-orange-600' : 'text-indigo-600'}`;
+            document.getElementById('selected-title').innerText = data.title;
+            document.getElementById('selected-slogan').innerText = `"${data.slogan}"`;
+            
+            // Strengths and Weaknesses
+            document.getElementById('selected-strengths-summary').innerText = data.strengthsSummary;
+            const strengthsUl = document.getElementById('selected-strengths-details');
+            strengthsUl.innerHTML = '';
+            data.strengthsDetails.forEach(detail => {
+                const li = document.createElement('li');
+                li.innerText = detail;
+                strengthsUl.appendChild(li);
+            });
+
+            document.getElementById('selected-weakness-summary').innerText = data.weaknessSummary;
+            const weaknessesUl = document.getElementById('selected-weakness-details');
+            weaknessesUl.innerHTML = '';
+            data.weaknessDetails.forEach(detail => {
+                const li = document.createElement('li');
+                li.innerText = detail;
+                weaknessesUl.appendChild(li);
+            });
+
+            // Slump and Parent guides
+            document.getElementById('selected-slump').innerText = data.slump;
+            document.getElementById('selected-parent-tip').innerText = data.parentTip;
+
+            // Strategy Cards
+            const strategyContainer = document.getElementById('study-strategies');
+            strategyContainer.innerHTML = '';
+            data.strategies.forEach((strategy, index) => {
+                const card = document.createElement('div');
+                card.className = "flex gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100 hover:border-indigo-100 transition duration-200";
+                
+                const indexBadge = document.createElement('div');
+                indexBadge.className = `w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0 ${barColor}`;
+                indexBadge.innerText = index + 1;
+
+                const textDiv = document.createElement('div');
+                const titleP = document.createElement('p');
+                titleP.className = "font-bold text-slate-900 text-sm";
+                titleP.innerText = strategy.title;
+
+                const descP = document.createElement('p');
+                descP.className = "text-xs text-slate-600 mt-1 leading-relaxed";
+                descP.innerText = strategy.text;
+
+                textDiv.appendChild(titleP);
+                textDiv.appendChild(descP);
+                card.appendChild(indexBadge);
+                card.appendChild(textDiv);
+                strategyContainer.appendChild(card);
+            });
+
+            // Tags
+            const tagContainer = document.getElementById('tag-container');
+            tagContainer.innerHTML = '';
+            data.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = "text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-1 rounded-lg";
+                span.innerText = tag;
+                tagContainer.appendChild(span);
+            });
+
+            // Sync scheduler title if visible
+            document.getElementById('schedule-title-mbti').innerText = mbti;
+            if(!document.getElementById('schedule-card').classList.contains('hidden')) {
+                generateSchedule(); // re-generate for selected if open
+            }
+        }
+
+        // Generate Custom Day Timeline
+        function generateSchedule() {
+            const data = mbtiData[currentSelected];
+            const scheduleCard = document.getElementById('schedule-card');
+            const timeline = document.getElementById('schedule-timeline');
+            
+            document.getElementById('schedule-title-mbti').innerText = currentSelected;
+            timeline.innerHTML = '';
+
+            data.schedule.forEach((item, index) => {
+                const isLast = index === data.schedule.length - 1;
+                const li = document.createElement('li');
+                
+                li.innerHTML = `
+                    <div class="relative pb-8">
+                        ${!isLast ? '<span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-slate-200" aria-hidden="true"></span>' : ''}
+                        <div class="relative flex space-x-3">
+                            <div>
+                                <span class="h-8 w-8 rounded-full bg-indigo-50 border border-indigo-200 flex items-center justify-center">
+                                    <span class="text-xs font-bold text-indigo-600">${index + 1}</span>
+                                </span>
+                            </div>
+                            <div class="flex-1 min-w-0 pt-1.5 flex justify-between space-x-4">
+                                <div>
+                                    <p class="text-xs font-bold text-indigo-700">${item.time}</p>
+                                    <p class="text-sm text-slate-800 mt-1">${item.action}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                timeline.appendChild(li);
+            });
+
+            scheduleCard.classList.remove('hidden');
+            // Smooth scroll to schedule
+            scheduleCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeSchedule() {
+            document.getElementById('schedule-card').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
